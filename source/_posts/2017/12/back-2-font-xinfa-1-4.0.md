@@ -9,22 +9,23 @@ tags:
 
 上一篇博客是我们《后端工程师入门前端页面重构》系列的第一篇，我们介绍了页面布局的口诀：
 
-**从左到右，从上到下，从整体到布局，化整为零。**
-那么在接下来的几篇文章中，我们就来聊聊页面布局的心法。
+**从左到右，从上到下，化整为零。**
 
-如果说口诀可以让你学会布局一个简单的页面，那么心法会很大程度上提升你的布局效率。
+那么在接下来的几篇文章中，我们就来聊聊页面布局的「心法」和一些具体的「招式」。
 
-在上一篇文章，我们一直推荐使用高效的浮动布局，那么什么是 **浮动** 呢？
+那么什么是心法呢？
 
 <!-- more -->
 
-大家都见过荷叶浮在水面上的场景吧，荷叶浮在水面上，把原本的水面遮挡住，让人只看到荷叶。
+如果说口诀是页面布局的原则，那么心法就是对页面布局中一些重要概念的认识。
 
-其实上面的场景本质是空间视图中谁**遮住**了谁的问题，说白了就是谁在上方被看见，谁在下方被遮住！
+在上一篇文章，我们一直推荐使用高效的浮动布局，那么什么是 **浮动** 呢？
 
-我们所说的浮动其实就是**调整元素的空间层级关系**，让浮动的元素在上层被显示，让非浮动的元素在下层被遮住。
+大家都玩过磁铁吧，在磁铁的周围，所有的铁块会被磁铁所吸引。
 
-为了更好的了解 **浮动** 和 **布局** 的关系，我们先来了解一下 HTML的元素种类吧！
+那么浮动就好比页面上的一块磁铁，它会吸引页面上的所有元素，让它们朝一个方向进行组合、包含、交叠，进而完成整个页面的布局。
+
+下面就让我们来看看页面中究竟有哪些元素吧。
 
 ## HTML 块状元素和行内元素
 
@@ -39,37 +40,26 @@ tags:
 首先我们来看一段简单的代码：
 
 {% codeblock lang:html %}
-    <!DOCTYPE html>
-    <html>
-    <head>
-    	<title>div和span标签的使用</title>
-    	<style type="text/css">
-    		.div{
-    			background-color: red;
-    			height: 300px;
-    			width: 300px;
-    			/*选中我们的设置class="div"*/	
-    		}
-    
-    		.element{
-    			background-color: green;
-    			height: 400px;
-    			width: 400px;
-    			/*选中我们的设置class="element"*/	
-    		}
-    	</style>
-    </head>
-    <body>
-    	<div class="div">这是div标签里面的内容</div>
-    	<span class="element">这是span标签的内容</span>
-    </body>
-    </html>
-    
-{% endcodeblock %}
+	<style type="text/css">
+		.div{
+			background-color: red;
+			height: 300px;
+			width: 300px;
+		}
 
+		.element{
+			background-color: green;
+			height: 400px;
+			width: 400px;
+		}
+	</style>
+	<div class="div">这是div标签里面的内容</div>
+	<span class="element">这是span标签的内容</span>
+{% endcodeblock %}
+"
 在上面的代码中，我们使用 div 和 span 画了两个区域，并且使用「height」和「width」指定它们的高度。效果如下：
 
-![效果图](/image/back-2-font-xinfa-1/html-css-show.jpg)
+![效果图](/image/back-2-font-xinfa-1/html-css-show.png)
 
 我们发现：我们设置的高度和宽度只对 div 标签产生效果，对 span 标签没有产生效果。这是为什么呢？
 
@@ -94,31 +84,17 @@ tags:
 来来来，代码走一波！
 
 {% codeblock lang:html %}
-    <!DOCTYPE html>
-    <html>
-    <head>
-    	<title>div和span标签的使用</title>
-    	<style type="text/css">
-    		.div{
-    			background-color: red;
-    			/*height: 300px;*/
-    			/*width: 300px;*/
-    			/*选中我们的设置class="div"*/	
-    		}
-    
-    		.element{
-    			background-color: green;
-    			/*height: 400px;*/
-    			/*width: 400px;*/
-    			/*选中我们的设置class="element"*/	
-    		}
-    	</style>
-    </head>
-    <body>
-    	<div class="div">这是div标签里面的内容</div>
-    	<span class="element">这是span标签的内容</span>
-    </body>
-    </html>
+	<style type="text/css">
+		.div{
+			background-color: red;
+		}
+
+		.element{
+			background-color: green;
+		}
+	</style>
+	<div class="div">这是div标签里面的内容</div>
+	<span class="element">这是span标签的内容</span>
 {% endcodeblock %}
 
 ![效果图](/image/back-2-font-xinfa-1/block-inline-elemet.png)
@@ -159,30 +135,22 @@ tags:
 下面我们使用 HTML 和 CSS 来写一段代码有误差的代码： 
 
 {% codeblock lang:html %}
-    <!DOCTYPE html>
-    <html>
-    <head>
-    	<title>使用行内元素是有误差的</title>
-    	<style type="text/css">
-    		.div-1{
-    			background-color: red;
-    			/*让其作为行内元素显示*/
-    			display: inline-block;
-    			
-    		}
-    
-    		.div-2{
-    			background-color: green;
-    			/*让其作为行内元素显示*/
-    			display:inline-block;
-    		}
-    	</style>
-    </head>
-    <body>
-    	<div class="div-1">123</div>
-    	<div class="div-2">123</div>
-    </body>
-    </html>
+	<style type="text/css">
+		.div-1{
+			background-color: red;
+			display: inline-block;
+		
+		}
+
+		.div-2{
+			background-color: green;
+			display:inline-block;
+		}
+	</style>
+
+
+	<div class="div-1">123</div>
+	<div class="div-2">123</div>
 {% endcodeblock %}
 
 上面的这段代码，我们使用块状元素 div 写了两个区块，并且使用 
@@ -192,7 +160,7 @@ tags:
 
 让块状元素 div 来作为行内元素显示，然后我们来看效果：
 
-![行内元素误差效果显示](/image/back-2-font-xinfa-1/inline-element-error.jpg)
+![行内元素误差效果显示](/image/back-2-font-xinfa-1/inline-element-error.png)
 
 我们发现**虽然两个 div 可以变成行内元素在一行显示，但是它们之间还是存在空白，不能完美的相邻在一起。**
 
@@ -208,41 +176,32 @@ tags:
 首先我们画两个 div，并且设置它们的背景颜色，高度以及宽度，代码如下：
 
 {% codeblock lang:html %}
-    <!DOCTYPE html>
-    <html>
-    <head>
-        <title>简单的浮动布局</title>
-        <style type="text/css">
-            .block-1{
-                width: 200px;
-                height: 200px;
-                background: red;
-            }
-    
-            .block-2{
-                width: 200px;
-                height: 200px;
-                background: green;
-            }
-        </style>
-    </head>
-    <body>
-    
-    <div class="block-1">
-        这是第一个区块
-    </div>
-    
-    <div class="block-2">
-        这是第二个区块
-    </div>
-    </body>
-    </html>
-       
+	<style type="text/css">
+	    .block-1{
+		width: 200px;
+		height: 200px;
+		background: red;
+	    }
+
+	    .block-2{
+		width: 200px;
+		height: 200px;
+		background: green;
+	    }
+	</style>
+
+	<div class="block-1">
+	这是第一个区块
+	</div>
+
+	<div class="block-2">
+	这是第二个区块
+	</div>
 {% endcodeblock %} 
 
 打开浏览器看效果是这个样子滴：
 
-![浮动之前的效果图](/image/back-2-font-xinfa-1/float-layout.jpg)
+![浮动之前的效果图](/image/back-2-font-xinfa-1/float-layout.png)
 
 这个效果很正常嘛。 div 作为很霸道的块状元素，当然占据一整行，两个 div 就分别占据两行喽。
 
@@ -257,16 +216,11 @@ tags:
 来来来，完整代码走一波！
 
 {% codeblock lang:html %}
-    <!DOCTYPE html>
-    <html>
-    <head>
-        <title>简单的浮动布局</title>
         <style type="text/css">
             .block-1{
                 width: 200px;
                 height: 200px;
                 background: red;
-                /*设置为浮动*/
                 float: left;
             }
     
@@ -274,7 +228,6 @@ tags:
                 width: 200px;
                 height: 200px;
                 background: green;
-                /*设置为浮动*/
                 float: left;
             }
         </style>
@@ -288,8 +241,6 @@ tags:
     <div class="block-2">
         这是第二个区块
     </div>
-    </body>
-    </html>
 {% endcodeblock %}
 
 然后我们用浏览器打开看效果：
@@ -306,45 +257,7 @@ tags:
 
 当然可以啦。left 的意思是指定左浮动，意思是让元素悬浮在浏览器的左边，right就是相反的意思，让元素悬浮在浏览器的右边。
 
-来来来，让我们把上面代码中的 left 变成right，代码再走一波!
-
-{% codeblock lang:html %}
-    <!DOCTYPE html>
-    <html>
-    <head>
-        <title>简单的浮动布局</title>
-        <style type="text/css">
-            .block-1{
-                width: 200px;
-                height: 200px;
-                background: red;
-                /*设置为浮动*/
-                float: right;
-            }
-    
-            .block-2{
-                width: 200px;
-                height: 200px;
-                background: green;
-                /*设置为浮动*/
-                float: right;
-            }
-        </style>
-    </head>
-    <body>
-    
-    <div class="block-1">
-        这是第一个区块
-    </div>
-    
-    <div class="block-2">
-        这是第二个区块
-    </div>
-    </body>
-    </html>
-{% endcodeblock %}
-
-让我们打开浏览器看效果！
+来来来，让我们把上面代码中的 left 变成right，看一下效果!
 
 ![右浮动效果图](/image/back-2-font-xinfa-1/float-right.png)
 
@@ -360,39 +273,31 @@ tags:
 
 ## 还是一个简单的浮动布局
 {% codeblock lang:html %}
-    <!DOCTYPE html>
-    <html>
-    <head>
-        <title>还是一个简单的浮动布局</title>
-        <style type="text/css">
-            .block-1{
-                width: 200px;
-                height: 200px;
-                float: left;
-                background: red;
-            }
-    
-            .block-2{
-                width: 200px;
-                height: 200px;
-                float: left;
-                background: green;
-            }
-        </style>
-    </head>
-    <body>
-        <div class="parent">
-            <div class="block-1">
-                我是第一个子元素
-            </div>
-    
-            <div class="block-2">
-                我是第二个子元素
-            </div>
-        </div>
-    </body>
-    </html>
-    
+	<style type="text/css">
+	    .block-1{
+		width: 200px;
+		height: 200px;
+		float: left;
+		background: red;
+	    }
+
+	    .block-2{
+		width: 200px;
+		height: 200px;
+		float: left;
+		background: green;
+	    }
+	</style>
+
+	<div class="parent">
+	    <div class="block-1">
+		我是第一个子元素
+	    </div>
+
+	    <div class="block-2">
+		我是第二个子元素
+	    </div>
+	</div>
 {% endcodeblock %}
 
 ![效果图](/image/back-2-font-xinfa-1/float-layout-show-2.png)
@@ -424,10 +329,6 @@ tags:
 
 代码如下：
 {% codeblock lang:html %}
-    <!DOCTYPE html>
-    <html>
-    <head>
-        <title>清除浮动演示</title>
         <style type="text/css">
             .first{
                 background: red;
@@ -449,8 +350,7 @@ tags:
                 height: 200px;
             }
         </style>
-    </head>
-    <body>
+
         <div class="parent">
             <div class="first">
                 第一个区块
@@ -464,18 +364,13 @@ tags:
                 第三个区块
             </div>
         </div>
-    </body>
-    </html>
-    
 {% endcodeblock %}
 
 ![效果图](/image/back-2-font-xinfa-1/div-float-1.png)
 
-
 我们使用谷歌浏览器来检查一下，发现子元素的高度和宽度和设置的值一样，但是父元素高度还是为０。
 
 ![](/image/back-2-font-xinfa-1/origin-parent-height.png)
-
 
 现在我们有一个需求：在保持浮动的情况下，让第三块区域在下一行显示，如何去做？
 
@@ -491,50 +386,42 @@ tags:
 来来来，代码敲一波：
 
 {% codeblock lang:html %}
-    <!DOCTYPE html>
-        <html>
-        <head>
-            <title>清除浮动演示</title>
-            <style type="text/css">
-                .first{
-                    background: red;
-                    width: 200px;
-                    height: 200px;
-                    float: left;
-                }
-                .second{
-                    background: yellow;
-                    width: 200px;
-                    float: left;
-                    height: 200px;
-        
-                }
-                .third{
-                    float: left;
-                    background: green;
-                    width: 200px;
-                    height: 200px;
-                    clear: left;
-                }
-            </style>
-        </head>
-        <body>
-            <div class="parent">
-                <div class="first">
-                    第一个区块
-                </div>
-        
-                <div class="second">
-                    第二个区块
-                </div>
-        
-                <div class="third">
-                    第三个区块
-                </div>
-            </div>
-        </body>
-        </html>
+    <style type="text/css">
+        .first{
+            background: red;
+            width: 200px;
+            height: 200px;
+            float: left;
+        }
+        .second{
+            background: yellow;
+            width: 200px;
+            float: left;
+            height: 200px;
 
+        }
+        .third{
+            float: left;
+            background: green;
+            width: 200px;
+            height: 200px;
+            clear: left;
+        }
+    </style>
+
+    <div class="parent">
+        <div class="first">
+            第一个区块
+        </div>
+
+        <div class="second">
+            第二个区块
+        </div>
+
+        <div class="third">
+            第三个区块
+        </div>
+    </div>
 {% endcodeblock %}
 
 话不多说，让我们先看效果。
@@ -561,7 +448,7 @@ tags:
 
 浏览器会说：“老三啊，你的左边有两个浮动元素，但是你又不想左边有浮动元素，所以你就吃点亏，到 **下一行** 来吧！”
 
-于是第三个区块就到了下一行啦。  
+于是第三个区块就到了下一行啦。
 
 虽然有点复杂，但是按照上面思路进行一步步分解，是不是就变的很简单呢？
 
@@ -579,7 +466,7 @@ right 就是不让当前元素 **右边** 存在浮动元素嘛。
 
 ## 父元素高度真的需要吗？
 
-![](/image/back-2-font-xinfa-1/clear-float-parent.png)
+![](/image/back-2-font-xinfa-1/	)
 
 那么，在解决之前，按照我们的套路，我们要问一个问题：我们可以不管父元素的高度吗？反正布局都设计出来了。
 
@@ -610,10 +497,6 @@ right 就是不让当前元素 **右边** 存在浮动元素嘛。
 来来来，代码走一波！
 
 {% codeblock lang:html %}
-    <!DOCTYPE html>
-    <html>
-    <head>
-        <title>DIV和CSS的前世今生</title>
         <style type="text/css">
             .first{
                 background: red;
@@ -639,8 +522,7 @@ right 就是不让当前元素 **右边** 存在浮动元素嘛。
                 clear: both;
             }
         </style>
-    </head>
-    <body>
+
         <div class="parent">
             <div class="first">
                 第一个区块
@@ -657,9 +539,6 @@ right 就是不让当前元素 **右边** 存在浮动元素嘛。
     
             </div>
         </div>
-    </body>
-    </html>
-
 {% endcodeblock %}
 
 然后我们会发现，父元素竟然有高度了，而且和浮动布局的高度是一样的！
@@ -714,10 +593,6 @@ right 就是不让当前元素 **右边** 存在浮动元素嘛。
 来来来，让我们完整的敲一次代码！
 
 {% codeblock lang:html %}
-    <!DOCTYPE html>
-    <html>
-    <head>
-        <title>DIV和CSS最佳实践</title>
         <style type="text/css">
             .first{
                 background: red;
@@ -752,8 +627,7 @@ right 就是不让当前元素 **右边** 存在浮动元素嘛。
                 display: block;
             }
         </style>
-    </head>
-    <body>
+
         <div class="parent">
             <div class="first">
                 第一个区块
@@ -768,9 +642,6 @@ right 就是不让当前元素 **右边** 存在浮动元素嘛。
             </div>
     
         </div>
-    </body>
-    </html>
-    
 {% endcodeblock %}
 
 ![使用最佳实践-伪类后的效果图](/image/back-2-font-xinfa-1/div-float-after.png)
