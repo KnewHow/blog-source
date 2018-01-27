@@ -123,7 +123,7 @@ div{
 <div style="background-color: green">这是第二个区块</div>
 ```
 
-然后给它们定义样式：
+使用浮动：
 
 ```css
 div{
@@ -141,7 +141,40 @@ div{
 `left` 是把元素往左边吸引，而`right` 是把元素往右边吸引。
 
 
-## 父元素高度问题
+## 清除浮动
+
+既然浮动如此的好用，那么我们能不能再使用浮动去模拟一个场景呢：我们有三个元素块状元素，前两个块状元素需要使用浮动进行相邻，在第一行；第三个元素不使用浮动，让他保持块状元素的特征在第二行。
+
+```html
+<div class="float-div" style="background-color: red"> 第一个浮动元素块 </div>
+<div class="float-div" style="background-color: green"> 第二个浮动元素块 </div>
+<div class="nofloat-div"  style="background-color: yellow"> 非浮动元素块 </div>
+```
+
+定义样式：
+
+```css
+.float-div{
+    width: 100px;
+    height: 100px;
+    float: left;
+}
+.nofloat-div{
+    width: 100px;
+    height: 100px;
+}
+```
+
+看效果：
+![](/image/back-2-font-xinfa-1/float-problem.png)
+
+我去，我们的非浮动元素块去哪了？为什么只剩下文字了？我们使用浏览器检查一下，发现，非浮动元素竟然跑到上面去了。
+
+![](/image/back-2-font-xinfa-1/float-problem-nofloat.png)
+
+这个不符合我们的需求啊！那么怎样解决这个问题呢？
+
+
 在实际开发中，我们经常需要标签的嵌套使用，下面我们来模拟一下场景，代码如下：
 {% codeblock lang:html %}
 	<style type="text/css">
