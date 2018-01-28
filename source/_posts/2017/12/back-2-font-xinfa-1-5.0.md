@@ -138,12 +138,12 @@ div{
 
 我们发现，通过浮动，可以使两个原本很难相邻在一起的块状元素，**完美** 的相邻在一起。
 
-`left` 是把元素往左边吸引，而`right` 是把元素往右边吸引。
+使用 `left` 是把元素往左边吸引，而 `right` 是把元素往右边吸引。
 
 
 ## 清除浮动
 
-既然浮动如此的好用，那么我们能不能再使用浮动去模拟一个场景呢：我们有三个元素块状元素，前两个块状元素需要使用浮动进行相邻，在第一行；第三个元素不使用浮动，让他保持块状元素的特征在第二行。
+上面我们已经介绍了浮动的基本用法，那么在实际的开发过程中，我们可能有这样的需要：我们有三个元素块状元素，前两个块状元素需要使用浮动进行相邻，在上一行；第三个元素不使用浮动，让他保持块状元素的特征在下一行。
 
 ```html
 <div class="float-div" style="background-color: red"> 第一个浮动元素块 </div>
@@ -155,7 +155,7 @@ div{
 
 ```css
 .float-div{
-    width: 100px;
+		width: 100px;
     height: 100px;
     float: left;
 }
@@ -168,135 +168,29 @@ div{
 看效果：
 ![](/image/back-2-font-xinfa-1/float-problem.png)
 
-我去，我们的非浮动元素块去哪了？为什么只剩下文字了？我们使用浏览器检查一下，发现，非浮动元素竟然跑到上面去了。
+我去，我们的非浮动元素块去哪了？为什么只剩下文字了？ 这和我们预想的情况不一样啊！我们使用浏览器检查一下，发现，非浮动元素竟然跑到上面去了。
 
 ![](/image/back-2-font-xinfa-1/float-problem-nofloat.png)
 
 这个不符合我们的需求啊！那么怎样解决这个问题呢？
 
+要解决这个问题，就要使用 **清除浮动**
 
-在实际开发中，我们经常需要标签的嵌套使用，下面我们来模拟一下场景，代码如下：
-{% codeblock lang:html %}
-	<style type="text/css">
-	    .block-1{
-		width: 200px;
-		height: 200px;
-		float: left;
-		background: red;
-	    }
+我们在非浮动元素的样式里面添加一行 `clear:left`，即可实现清除浮动，让我们来看效果：
 
-	    .block-2{
-		width: 200px;
-		height: 200px;
-		float: left;
-		background: green;
-	    }
-	</style>
+![](/image/back-2-font-xinfa-1/clear-left.png)
 
-	<div class="parent">
-	    <div class="block-1">
-		我是第一个子元素
-	    </div>
+真的把非浮动元素给压下来了！而且完美发符合我们的设计需求！
 
-	    <div class="block-2">
-		我是第二个子元素
-	    </div>
-	</div>
-{% endcodeblock %}
-
-
-这段代码有问题吗？　当然没问题啦，不信我们使用谷歌浏览器检查一下。
-
-![](/image/back-2-font-xinfa-1/second-check-child.png)
-
-子元素宽度和高度都是 OK 的。
-
-我们再来看看它父元素高度和宽度。
-
-![](/image/back-2-font-xinfa-1/parent-check.png)
-
-我去！父元素的高度竟然是 **０**！！　我是不是安装了假的浏览器？
-
-
-## 清除浮动
-还是嵌套的使用元素标签，代码如下：
-{% codeblock lang:html %}
-        <style type="text/css">
-            .first{
-                background: red;
-                width: 200px;
-                height: 200px;
-                float: left;
-            }
-            .second{
-                background: yellow;
-                width: 200px;
-                float: left;
-                height: 200px;
-    
-            }
-            .third{
-                float: left;
-                background: green;
-                width: 200px;
-                height: 200px;
-            }
-        </style>
-
-        <div class="parent">
-            <div class="first">
-                第一个区块
-            </div>
-    
-            <div class="second">
-                第二个区块
-            </div>
-    
-            <div class="third">
-                第三个区块
-            </div>
-        </div>
-{% endcodeblock %}
-
-不用看效果图我们都知道：**子元素高度正常，父元素高度为0。**
-现在我们有一个需求：在保持浮动的情况下，让第三块区域在下一行显示，如何去做？
-
-这就要使用到另个招式： 「清除浮动」。
-
-我们只要在第三块区块的「.third」中添加
-{% codeblock lang:html %}
-    clear: left;
-{% endcodeblock %} 
-
-即可。
-
-话不多说，让我们先看效果。
-
-![添加 clear: left;的效果图](/image/back-2-font-xinfa-1/add-clear-left-1.png)
-
-真的把第三个区块给压下来了！
-
-
-
-还是按照上面的套路，我们来分析「 clear: left; 」这段代码：
+我们来分析「 clear: left; 」这段代码：
 
 它用到的关键字是「 clear 」，它的含义是清除。
 
 而 「 left 」 代表是左边。
 
-那么它合起来的意思是：**清除左边的浮动元素**。
+那么它合起来的意思是：清除左边的浮动元素。
 
-说到更明白一点就是：**不让当前元素的左边有浮动元素。**
-
-当前元素是第三个区块，它的左边有两个浮动元素 first 和second 。
-
-那这段代码的意思就是：**不让第三个区块左边有浮动元素**，那浏览器这么处理呢？
-
-浏览器会说：“老三啊，你的左边有两个浮动元素，但是你又不想左边有浮动元素，所以你就吃点亏，到 **下一行** 来吧！”
-
-于是第三个区块就到了下一行啦。
-
-虽然有点复杂，但是按照上面思路进行一步步分解，是不是就变的很简单呢？
+说到更明白一点就是：不让当前元素的左边有浮动元素（也可以理解为让浮动元素持有站位空间）。于是就把非浮动元素压到下一行来咯。
 
 让我们再来拓展一下，clear 除了可以设置为 left，还可以设置为 「 right 」 和 「 both 」。
 
@@ -306,194 +200,38 @@ right 就是不让当前元素 **右边** 存在浮动元素嘛。
 
 那 both 就是不让当前元素的 **两边** 出现浮动元素喽。
 
-说了这么多，我们好像还有一个问题没有解决，父元素的高度还是0啊！
+到这里，我们介绍完了浮动布局和清除浮动的概念和基本用法，那它们在页面布局中是如何被使用的呢？
+## 浮动布局--最佳实践
+我们在心法篇中提到页面从上到下都是有层级的，那么我们如何进行明确的分层呢？
 
-这个有点尴尬！
+如豆瓣的首页，有着明显是上下分层。在每一层中，我们都需要使用 **浮动布局** 来使我们的元素紧密的交叠在一起，但是在每一行的最后，我们需要使用 **清除浮动** 来让浮动元素保持站位空间。
 
-## 父元素高度真的需要吗？
+![](/image/back-2-font-xinfa-1/line.png)
 
-那么，在解决之前，按照我们的套路，我们要问一个问题：我们可以不管父元素的高度吗？反正布局都设计出来了。
+因此我们需要在每一行的末尾加一个空的 div 标签，并在设置它为清除浮动。
 
-我的实习导师告诉我：“这是不行的。**浮动布局的占位空间往往是我们理想的父元素高度。**”
+在 CSS 中，我们可以使用 「after 选择器」 来实现添加元素，具体的用法可以参考:[W3C after 选择器](http://www.w3school.com.cn/cssref/selector_after.asp)
 
-他说的太抽象，我们来说的直白一点：
+下面直接给出代码： 
 
-「在布局中我们往往使用 **浮动布局** 来实现某一块区域的布局」。
-
-「然后我们最好用一个DIV去 **包裹** 整个浮动布局，用于和其它的布局区分开」。
-
-「最后我们要求这个父DIV和高度要和浮动布局的 **高度** 一样」。
-
-对于上面的三点内容，前两点在我们的代码中已经做到了。
-
-想要解决第三个问题，就得使用我们上面讲的招式- **清除浮动**。
-
-我们在父区块最后面增加一个空的DIV，将它设置它为「 clear:both 」。
-
-为什么要这么使用呢，具体的原因我也讲不清楚，大概是这样的吧：
-
-因为浮动元素会影响它的位置，我们必须确保它在父元素的最后一行，不受 **任何** 浮动元素干扰,我们必须清除浮动对它的干扰。
-
-来来来，代码走一波！
-
-{% codeblock lang:html %}
-        <style type="text/css">
-            .first{
-                background: red;
-                width: 200px;
-                height: 200px;
-                float: left;
-            }
-            .second{
-                background: yellow;
-                width: 200px;
-                float: left;
-                height: 200px;
-    
-            }
-            .third{
-                float: left;
-                background: green;
-                width: 200px;
-                height: 200px;
-                clear: left;
-            }
-            .last{
-                clear: both;
-            }
-        </style>
-
-        <div class="parent">
-            <div class="first">
-                第一个区块
-            </div>
-    
-            <div class="second">
-                第二个区块
-            </div>
-    
-            <div class="third">
-                第三个区块
-            </div>
-            <div class="last">
-    
-            </div>
-        </div>
-{% endcodeblock %}
-
-然后我们会发现，父元素竟然有高度了，而且和浮动布局的高度是一样的！
-
-![父元素有高度了](/image/back-2-font-xinfa-1/parrent-height.png)
-
-哈哈，到了这里，我们已经完全解决父元素高度为 0 的问题，那么我想问：
-
-上面的解决方法是最好的吗？
-
-
-## 清除浮动－最佳实践
-
-按照套路，我们得问一个问题：上面的解决方案有问题吗？
-
-回答是肯定的！
-
-因为按照上面的方法，我们需要在 **手动** 在每个父区块最后添加一个空的 DIV，这样的做法是 **低效的**！
-
-因为一个页面有成百上千个布局区块，如果每一个我们都手动写一个空的　DIV，增加工作量不说，日后维护起来，也很麻烦。
-
-我们可不可以在某个地方统一定义，然后全局使用呢？
-
-回答是当然可以啦。
-
-这个要使用到另一个新的招式-CSS 的「伪类」,伪类的具体用法可以参考[W3C的CSS伪类教程。](http://www.w3school.com.cn/css/css_pseudo_elements.asp)
-
-我们这里使用的是「after」伪类，它可以自动的在某个父元素的最后一行添加最后一个子元素，并且设置属性。
-
-上面的话有点拗口，来来来，我们直接上代码分析：
-
-{% codeblock lang:html %}
-    .parent:after{
-        /*设置最后一个元素的内容为空*/
-        content: "";
-        /*设置最后一个元素为清除两边浮动*/
-        clear: both;
-        /*设置最后一个元素为块状元素*/
-        display: block;
-    }
-
-{% endcodeblock %}
-
-上面的代码会自动在「parent」作用的标签的最后一行添加一个子元素，并且设置该元素为「块状元素」「内容为空」以及「清除浮动」。
-
-只要把父元素的 class属性设置值为 「parent」，那么就可以直接使用啦。
-
-来来来，让我们完整的敲一次代码！
-
-{% codeblock lang:html %}
-        <style type="text/css">
-            .first{
-                background: red;
-                width: 200px;
-                height: 200px;
-                float: left;
-            }
-            .second{
-                background: yellow;
-                width: 200px;
-                float: left;
-                height: 200px;
-    
-            }
-            .third{
-                float: left;
-                background: green;
-                width: 200px;
-                height: 200px;
-                clear: left;
-            }
-    
-            /*
-              伪类
-             */
-            .parent:after{
-                /*设置最后一个元素的内容为空*/
-                content: "";
-                /*设置最后一个元素为清除两边浮动*/
-                clear: both;
-                /*设置最后一个元素为块状元素*/
-                display: block;
-            }
-        </style>
-
-        <div class="parent">
-            <div class="first">
-                第一个区块
-            </div>
-    
-            <div class="second">
-                第二个区块
-            </div>
-    
-            <div class="third">
-                第三个区块
-            </div>
-    
-        </div>
-{% endcodeblock %}
-
-![使用最佳实践-伪类后的效果图](/image/back-2-font-xinfa-1/div-float-after.png)
+```css
+xxxdiv:after{
+  	content: "";
+  	clear: both;
+  	display: block;
+}
+```        
 
 ## 心法小结
-
-
 最后，我们再来回顾一下文章介绍的一些心法：
 
 **1. HTML 分为块状元素和行内元素的，块状元素是独占一行的**
 
 **2. 浮动布局是解决多个块状元素在同一行的最佳方法**
 
-**3. 在嵌套的标签中使用浮动时，如果不使用清除浮动，父元素的高度会为0**
+**3. 清除浮动是解决页面上下分层的一个重要方式**
 
-**4. 清除浮动 + after伪类 是浮动布局的一个最佳实践**
+**4. 浮动 + 清除浮动是页面布局的一个最佳实践**
 
 文章中的一些招式可能说的太粗糙，先不用捉急，我们先学心法，招式到后面再专门的学习。
 
