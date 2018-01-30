@@ -1,0 +1,866 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next pisces use-motion" lang="zh-Hans,en,default">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.3" rel="stylesheet" type="text/css" />
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.3">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=5.1.3">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=5.1.3">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.3" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="前端," />
+
+
+
+
+
+
+
+
+
+
+<meta name="description" content="大家好，我是 KnewHow，一名前 Java 开发工程师。为什么要说是「前」呢？这要从两周前我加入一家新公司说起。 入职第一天，实习导师告诉我会有一个月的新人引导计划，当时心里还是美滋滋的，觉得这个公司比较人性化，没有把工程师当劳动力使。 但随后，我就被震撼到了。因为面试时就得知公司崇尚的是全栈文化，在部署完一切办公环境之后，实习导师告诉我开始学习的第一个技能竟然是：「前端页面重构」！！！ 当时">
+<meta name="keywords" content="前端">
+<meta property="og:type" content="article">
+<meta property="og:title" content="后端工程师入门前端页面重构（一）：口诀">
+<meta property="og:url" content="http://www.knewhow.me/2017/12/15/2017/12/back-2-font-koujue/index.html">
+<meta property="og:site_name" content="KnewHow">
+<meta property="og:description" content="大家好，我是 KnewHow，一名前 Java 开发工程师。为什么要说是「前」呢？这要从两周前我加入一家新公司说起。 入职第一天，实习导师告诉我会有一个月的新人引导计划，当时心里还是美滋滋的，觉得这个公司比较人性化，没有把工程师当劳动力使。 但随后，我就被震撼到了。因为面试时就得知公司崇尚的是全栈文化，在部署完一切办公环境之后，实习导师告诉我开始学习的第一个技能竟然是：「前端页面重构」！！！ 当时">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:image" content="http://www.knewhow.me/image/backend-enter-font-end/emoj1.jpeg">
+<meta property="og:image" content="http://www.knewhow.me/image/backend-enter-font-end/emoj3.jpeg">
+<meta property="og:image" content="http://www.knewhow.me/image/backend-enter-font-end/desk.png">
+<meta property="og:image" content="http://www.knewhow.me/image/backend-enter-font-end/secene-sum.png">
+<meta property="og:image" content="http://www.knewhow.me/image/backend-enter-font-end/box.png">
+<meta property="og:image" content="http://www.knewhow.me/image/backend-enter-font-end/emoj4.jpeg">
+<meta property="og:image" content="http://www.knewhow.me/image/backend-enter-font-end/douban-box.png">
+<meta property="og:image" content="http://www.knewhow.me/image/backend-enter-font-end/mobile-layout.png">
+<meta property="og:image" content="http://www.knewhow.me/image/backend-enter-font-end/good.gif">
+<meta property="og:image" content="http://www.knewhow.me/image/backend-enter-font-end/absolute-layout.png">
+<meta property="og:image" content="http://www.knewhow.me/image/backend-enter-font-end/float-layout.png">
+<meta property="og:image" content="http://www.knewhow.me/image/backend-enter-font-end/youyu.gif">
+<meta property="og:image" content="http://www.knewhow.me/image/backend-enter-font-end/layout-direction.png">
+<meta property="og:image" content="http://www.knewhow.me/image/backend-enter-font-end/douban-index.png">
+<meta property="og:image" content="http://www.knewhow.me/image/backend-enter-font-end/douban-index-first.png">
+<meta property="og:image" content="http://www.knewhow.me/image/backend-enter-font-end/douban-index-second.png">
+<meta property="og:image" content="http://www.knewhow.me/image/backend-enter-font-end/douban-head.png">
+<meta property="og:image" content="http://www.knewhow.me/image/backend-enter-font-end/douban-head-first.png">
+<meta property="og:image" content="http://www.knewhow.me/image/backend-enter-font-end/douban-head-second.png">
+<meta property="og:image" content="http://www.knewhow.me/image/backend-enter-font-end/douban-middle.png">
+<meta property="og:image" content="http://www.knewhow.me/image/backend-enter-font-end/douban-middle-first.png">
+<meta property="og:image" content="http://www.knewhow.me/image/backend-enter-font-end/douban-part-1.png">
+<meta property="og:image" content="http://www.knewhow.me/image/backend-enter-font-end/douban-part-2.png">
+<meta property="og:image" content="http://www.knewhow.me/image/backend-enter-font-end/douban-part-2-first.png">
+<meta property="og:image" content="http://www.knewhow.me/image/backend-enter-font-end/douban-part-3.png">
+<meta property="og:image" content="http://www.knewhow.me/image/backend-enter-font-end/douban-part-3-first.png">
+<meta property="og:image" content="http://www.knewhow.me/image/backend-enter-font-end/douban-min.png">
+<meta property="og:image" content="http://www.knewhow.me/image/backend-enter-font-end/douban-min-first.png">
+<meta property="og:updated_time" content="2018-01-24T01:08:17.817Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="后端工程师入门前端页面重构（一）：口诀">
+<meta name="twitter:description" content="大家好，我是 KnewHow，一名前 Java 开发工程师。为什么要说是「前」呢？这要从两周前我加入一家新公司说起。 入职第一天，实习导师告诉我会有一个月的新人引导计划，当时心里还是美滋滋的，觉得这个公司比较人性化，没有把工程师当劳动力使。 但随后，我就被震撼到了。因为面试时就得知公司崇尚的是全栈文化，在部署完一切办公环境之后，实习导师告诉我开始学习的第一个技能竟然是：「前端页面重构」！！！ 当时">
+<meta name="twitter:image" content="http://www.knewhow.me/image/backend-enter-font-end/emoj1.jpeg">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Pisces',
+    version: '5.1.3',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://www.knewhow.me/2017/12/15/2017/12/back-2-font-koujue/"/>
+
+
+
+
+
+  <title>后端工程师入门前端页面重构（一）：口诀 | KnewHow</title>
+  
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">KnewHow</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle"></p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://www.knewhow.me/2017/12/15/2017/12/back-2-font-koujue/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="knew how">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="KnewHow">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">后端工程师入门前端页面重构（一）：口诀</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-12-15T00:00:00+08:00">
+                2017-12-15
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/前端页面重构系列/" itemprop="url" rel="index">
+                    <span itemprop="name">前端页面重构系列</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p>大家好，我是 KnewHow，一名前 Java 开发工程师。为什么要说是「前」呢？这要从两周前我加入一家新公司说起。</p>
+<p>入职第一天，实习导师告诉我会有一个月的新人引导计划，当时心里还是美滋滋的，觉得这个公司比较人性化，没有把工程师当劳动力使。</p>
+<p>但随后，我就被震撼到了。因为面试时就得知公司崇尚的是全栈文化，在部署完一切办公环境之后，实习导师告诉我开始学习的第一个技能竟然是：「前端页面重构」！！！</p>
+<p>当时我的内心是这样子的。</p>
+<p><img src="/image/backend-enter-font-end/emoj1.jpeg" alt=""></p>
+<p>要知道，我对于前端，除了几个基本的标签外，可是一无所知。然而，我很快调整了状态，不就是前端开发么，应该难不倒机智的我。<br><a id="more"></a></p>
+<p><center><br>—————————— 以下开始严肃脸  —————————<br></center><br><img src="/image/backend-enter-font-end/emoj3.jpeg" alt=""></p>
+<h2 id="什么是页面重构"><a href="#什么是页面重构" class="headerlink" title="什么是页面重构"></a>什么是页面重构</h2><p><strong>好，第一个问题：那么什么是所谓的「页面重构」呢？</strong></p>
+<p>实习导师提出了要求，一定要有自己深刻的见解，好吧。。。。。</p>
+<p>于是，我的视线离开了电脑屏幕，开始寻求不一样的答案。很快，我注意到了我的办公桌面，是这样子滴。</p>
+<p><img src="/image/backend-enter-font-end/desk.png" alt="桌面场景"></p>
+<p>在我看来，前端页面重构，<strong>本质不就是处理空间布局的关系吗？</strong></p>
+<p>于是，机智如我，很快得出了自己的见解和答案。</p>
+<p>上面的这张图片是日常生活一个场景: 一张办公桌上面摆放着一些物品。桌面是背景，书和键盘并排的放着，白色书和紫色书交叠着，紫色书上面放着一个鼠标。</p>
+<p>其实这就是一个布局，也类似一张网页。</p>
+<p>然后我看了看旁边同事的桌子，也看了看整个公司的办公环境。</p>
+<p>然后我发现在一个布局中，存在三种关系:组成，包含和交叠。</p>
+<p><img src="/image/backend-enter-font-end/secene-sum.png" alt="空间布局关系"></p>
+<p>于是，我把这个结论告诉了实习导师。实习导师听后思考许久，但还是表达了赞赏。之后，他又提出了第二个问题：</p>
+<p>那么，你说说看什么是「盒子模型」？</p>
+<p>这一次，我马上 Google 了这个概念。机智如我，基于我以上的结论，很快我又得出了以下的解读。</p>
+<h2 id="盒子模型"><a href="#盒子模型" class="headerlink" title="盒子模型"></a>盒子模型</h2><p>在我看来，「盒子模型」,　<strong>本质就是去解决布局中位置和距离的关系</strong></p>
+<p>在上面的桌面场景中,键盘和紫色书是并排放着的，他们之间的距离可以使用「盒子模型」中的「外边距(margin)」来表示。</p>
+<p>鼠标被紫色书包含着，他们之间的距离可以使用「内边距(padding)」来表示。</p>
+<p>白色书和紫色书他们是交叠在一起的，他们同样可以使用「外边距(margin)」来表示，只不过值要是负数。<br><img src="/image/backend-enter-font-end/box.png" alt="盒子模型"></p>
+<p>我找到了实习导师，把我刚刚总结的答案告诉了他，他微微一笑,说：这个回答还算不错，接着又问道:</p>
+<p>那么在网页布局中，「盒子模型」是怎么被使用的呢?</p>
+<p>当时我的内心是这样的：<br><img src="/image/backend-enter-font-end/emoj4.jpeg" alt=""></p>
+<p>你怎么这么多问题，你特么还有完没完!!!</p>
+<p>理智的我压制了自己的小情绪，不就是怎么使用「盒子模型」吗？谷歌在手，天下我有!!</p>
+<h2 id="绝对定位布局"><a href="#绝对定位布局" class="headerlink" title="绝对定位布局"></a>绝对定位布局</h2><p>机智的我很快就有了答案，这也太简单了！</p>
+<p>我们只要把网页划分成一个个小块，然后调整他们的位置就行了。</p>
+<p>拿豆瓣的首页来说吧,我们可以把第一行分为三块，分别为豆瓣的logo,搜索框和后面的热搜主题。</p>
+<p>然后我们只需要使用「外边距(margin)」来设置他们和浏览器左边界之间的距离，就ＯＫ了。</p>
+<p><img src="/image/backend-enter-font-end/douban-box.png" alt=""></p>
+<p>哈哈，我简直就是个天才。</p>
+<p>我把我的答案告诉了实习导师。心里美滋滋的：“你们招我进来，是不亏的！！”</p>
+<p>实习导师轻瞟了一眼我的答案，预料中的赞美和肯定并没有出现。</p>
+<p>他目光转向我，说：“你的这种方案是可行的，但是只有入门级别的小白才会使用。<br>而且这种设计方案是低效的”！</p>
+<h2 id="绝对定位布局-－－-低效分析"><a href="#绝对定位布局-－－-低效分析" class="headerlink" title="绝对定位布局　－－　低效分析"></a>绝对定位布局　－－　低效分析</h2><p>“啊，低效的？为什么是低效的？”</p>
+<p>“在网页中，会有成百上千的元素，如果每个元素你都去量一下他的边距，这个效率是不是很低！”</p>
+<p>“好像是这样的”</p>
+<p>“最近我在研究移动端开发，移动端对绝对定位布局有一个更清晰的描述：”</p>
+<p>“绝对定位本质就是通过帧来定位一个视图的起点，高度和宽度。”</p>
+<p>“这个就要求你需要去计算每个视图的位置和大小。”</p>
+<p>“更可怕的是，如果有一天有一个元素的位置或者大小发生改变，那么你需要去修改所有的受影响的元素,这个更是低效的！”</p>
+<p>“简单来说　就是牵一发而动全身！”</p>
+<p><img src="/image/backend-enter-font-end/mobile-layout.png" alt=""></p>
+<p>“好像有那么几分道理，导师，你怎么这么厉害啊”</p>
+<p>“低调低调，我可是切了十年页面的男人！！”</p>
+<p><img src="/image/backend-enter-font-end/good.gif" alt=""></p>
+<p>“现在的页面布局都使用　「浮动布局」，你去调研一下吧”</p>
+<p>“嗯(亲昵)”</p>
+<h2 id="浮动布局"><a href="#浮动布局" class="headerlink" title="浮动布局"></a>浮动布局</h2><p>我用 Google 搜索了浮动布局和绝对定位布局。机智的我发现了他们最本质的一个区别：<br>　<br>绝对定位布局使用浏览器的窗口的边界作为参考，一个元素的位置是针对浏览器的边界来设定的。</p>
+<p>而且在绝对定位布局中，元素和元素之间视对方为不存在，这意味着当一个元素位置和大小发生了变化，不会对其他元素产生影响。</p>
+<p><img src="/image/backend-enter-font-end/absolute-layout.png" alt="绝对定位布局原型图"></p>
+<p>而在浮动布局中，他们的位置可以用其他的元素作为参考系。</p>
+<p>如果有一天被参考的元素位置或者大小发生了变化，那么当前元素的位置也会发生相应的变化。这样就比较高效了。</p>
+<p><img src="/image/backend-enter-font-end/float-layout.png" alt="浮动布局原型图"></p>
+<p>我兴奋的把调研结果告诉了实习导师，实习导师看了后，说:“还可以吧，”</p>
+<p>接着他又问道，“如果现在给你一个网页，你知道怎么布局吗？”</p>
+<p>“这个。。。”</p>
+<p><img src="/image/backend-enter-font-end/youyu.gif" alt=""></p>
+<h2 id="页面重构之口诀"><a href="#页面重构之口诀" class="headerlink" title="页面重构之口诀"></a>页面重构之口诀</h2><p>“看你这个犹犹豫豫的样子，我直接告诉你好了”</p>
+<p>“我们在网页的左上方放一块磁铁，那么所有元素都会被磁铁所吸引，那么磁力相反的方向，就是我们布局的方向”</p>
+<p><img src="/image/backend-enter-font-end/layout-direction.png" alt="布局磁铁模型示意图"></p>
+<p>“所以我们布局的方向就是从左到右，从上到下”</p>
+<p>“明白了吗？”</p>
+<p>“还不是很明白”</p>
+<p>“那我们来做个练习吧”</p>
+<p>“看这个豆瓣的首页，先从整体来看，按照从左到右可以分成几个部分？”</p>
+<p><img src="/image/backend-enter-font-end/douban-index.png" alt=""></p>
+<p>“一个部分吧”<br>“对的”<br>“因为整个页面就只有中间的那个部分”<br><img src="/image/backend-enter-font-end/douban-index-first.png" alt=""></p>
+<p>“从上到下，你看看这个页面可以分成几个部分？”</p>
+<p>“这个好像有点多了，每一行都可以分成一个部分吧”</p>
+<p><img src="/image/backend-enter-font-end/douban-index-second.png" alt=""></p>
+<p>“不错嘛，看你你已经掌握了规律,看看下面的可以分成几个部分”</p>
+<p><img src="/image/backend-enter-font-end/douban-head.png" alt=""></p>
+<p>“这个。。。”</p>
+<p>“不要捉急，安装我的口诀，先看从左到右分成几个部分，再看从上到下分成几个部分”</p>
+<p>“从左到右可以分成三个部分”</p>
+<p><img src="/image/backend-enter-font-end/douban-head-first.png" alt=""></p>
+<p>“从上到下就一个部分吧，感觉没有其他东西了”</p>
+<p><img src="/image/backend-enter-font-end/douban-head-second.png" alt=""></p>
+<p>“不错不错，我们再来一个难一点的,看看这个可以分成几个部分”</p>
+<p><img src="/image/backend-enter-font-end/douban-middle.png" alt=""></p>
+<p>“从左到右可以分成三个部分”</p>
+<p><img src="/image/backend-enter-font-end/douban-middle-first.png" alt=""></p>
+<p>“从上到下可以分成一个部分”</p>
+<p>“那这个呢?”</p>
+<p><img src="/image/backend-enter-font-end/douban-part-1.png" alt=""></p>
+<p>“从左到右一个部分，从上到下也是一个部分”</p>
+<p>“这个呢?”</p>
+<p><img src="/image/backend-enter-font-end/douban-part-2.png" alt=""></p>
+<p>“从左到右一个部分，从上到下三个部分”</p>
+<p><img src="/image/backend-enter-font-end/douban-part-2-first.png" alt=""></p>
+<p>“这个呢?”</p>
+<p><img src="/image/backend-enter-font-end/douban-part-3.png" alt=""></p>
+<p>“从左到右一个部分，从上到下四个部分”</p>
+<p><img src="/image/backend-enter-font-end/douban-part-3-first.png" alt=""></p>
+<p>“这个呢”</p>
+<p><img src="/image/backend-enter-font-end/douban-min.png" alt=""><br>“从左到右两个部分，从上到下一个部分”</p>
+<p><img src="/image/backend-enter-font-end/douban-min-first.png" alt=""></p>
+<p>“有没有发现什么规律？”</p>
+<p>“就是按从左到右，从上到下的顺序，先把网页的进行整体的划分，然后在依次对小模块进行划分，然后再对更小的模块进行划分，一直这么递归划分下去”</p>
+<p>“好的!你已经学会了”</p>
+<p>“啊！这么简单的？那个可以问你一个问题？能不能先从上到下，在从左到右？”</p>
+<p>“不能，因为人看网页的习惯就是先从左到右，在从上到下，这样的设计会有更好的视觉效果”</p>
+<p>这边文章只是介绍页面的重构的「口诀」，我们将在下一篇介绍「心法」。</p>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/前端/" rel="tag"># 前端</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2018/01/05/2017/12/back-2-font-xinfa-1-5.0/" rel="prev" title="后端工程师入门前端页面重构（二）：心法 I">
+                后端工程师入门前端页面重构（二）：心法 I <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <p class="site-author-name" itemprop="name">knew how</p>
+              <p class="site-description motion-element" itemprop="description">blogs</p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/">
+              
+                  <span class="site-state-item-count">2</span>
+                  <span class="site-state-item-name">日志</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-categories">
+                <a href="/categories/index.html">
+                  <span class="site-state-item-count">1</span>
+                  <span class="site-state-item-name">分类</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                <a href="/tags/index.html">
+                  <span class="site-state-item-count">1</span>
+                  <span class="site-state-item-name">标签</span>
+                </a>
+              </div>
+            
+
+          </nav>
+
+          
+
+          
+
+          
+          
+
+          
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#什么是页面重构"><span class="nav-number">1.</span> <span class="nav-text"><a href="#&#x4EC0;&#x4E48;&#x662F;&#x9875;&#x9762;&#x91CD;&#x6784;" class="headerlink" title="&#x4EC0;&#x4E48;&#x662F;&#x9875;&#x9762;&#x91CD;&#x6784;"></a>&#x4EC0;&#x4E48;&#x662F;&#x9875;&#x9762;&#x91CD;&#x6784;</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#盒子模型"><span class="nav-number">2.</span> <span class="nav-text"><a href="#&#x76D2;&#x5B50;&#x6A21;&#x578B;" class="headerlink" title="&#x76D2;&#x5B50;&#x6A21;&#x578B;"></a>&#x76D2;&#x5B50;&#x6A21;&#x578B;</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#绝对定位布局"><span class="nav-number">3.</span> <span class="nav-text"><a href="#&#x7EDD;&#x5BF9;&#x5B9A;&#x4F4D;&#x5E03;&#x5C40;" class="headerlink" title="&#x7EDD;&#x5BF9;&#x5B9A;&#x4F4D;&#x5E03;&#x5C40;"></a>&#x7EDD;&#x5BF9;&#x5B9A;&#x4F4D;&#x5E03;&#x5C40;</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#绝对定位布局-－－-低效分析"><span class="nav-number">4.</span> <span class="nav-text"><a href="#&#x7EDD;&#x5BF9;&#x5B9A;&#x4F4D;&#x5E03;&#x5C40;-&#xFF0D;&#xFF0D;-&#x4F4E;&#x6548;&#x5206;&#x6790;" class="headerlink" title="&#x7EDD;&#x5BF9;&#x5B9A;&#x4F4D;&#x5E03;&#x5C40;&#x3000;&#xFF0D;&#xFF0D;&#x3000;&#x4F4E;&#x6548;&#x5206;&#x6790;"></a>&#x7EDD;&#x5BF9;&#x5B9A;&#x4F4D;&#x5E03;&#x5C40;&#x3000;&#xFF0D;&#xFF0D;&#x3000;&#x4F4E;&#x6548;&#x5206;&#x6790;</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#浮动布局"><span class="nav-number">5.</span> <span class="nav-text"><a href="#&#x6D6E;&#x52A8;&#x5E03;&#x5C40;" class="headerlink" title="&#x6D6E;&#x52A8;&#x5E03;&#x5C40;"></a>&#x6D6E;&#x52A8;&#x5E03;&#x5C40;</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#页面重构之口诀"><span class="nav-number">6.</span> <span class="nav-text"><a href="#&#x9875;&#x9762;&#x91CD;&#x6784;&#x4E4B;&#x53E3;&#x8BC0;" class="headerlink" title="&#x9875;&#x9762;&#x91CD;&#x6784;&#x4E4B;&#x53E3;&#x8BC0;"></a>&#x9875;&#x9762;&#x91CD;&#x6784;&#x4E4B;&#x53E3;&#x8BC0;</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2018</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">knew how</span>
+
+  
+</div>
+
+
+  <div class="powered-by">由 <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a> 强力驱动</div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">主题 &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Pisces</a> v5.1.3</div>
+
+
+
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.3"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.3"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.3"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.3"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.3"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.3"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.3"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>
