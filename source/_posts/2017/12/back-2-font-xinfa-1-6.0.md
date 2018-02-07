@@ -103,7 +103,7 @@ span {
 然后给它们定义样式：
 
 ```css
-div{
+div {
     background-color: red;
     display: inline-block;
 }
@@ -126,7 +126,7 @@ div{
 使用浮动：
 
 ```css
-div{
+div {
     width: 200px;
     height: 200px;
     float: left;
@@ -140,94 +140,134 @@ div{
 
 使用 `left` 是把元素往左边吸引，而 `right` 是把元素往右边吸引。
 
+那么当浮动和元素嵌套结合会发生什么呢？
 
-## 清除浮动
-
-上面我们已经介绍了浮动的基本用法，那么在实际的开发过程中，我们可能有这样的需要：我们有三个块状元素，前两个块状元素需要使用浮动进行相邻，在上一行；第三个元素不使用浮动，让他保持块状元素的特征在下一行。
-
+## 父元素高度
+在页面布局中，元素嵌套使用是非常常见的，如下面的代码。
 ```html
-<div class="float-div" style="background-color: red"> 第一个浮动元素块 </div>
-<div class="float-div" style="background-color: green"> 第二个浮动元素块 </div>
-<div class="nofloat-div"  style="background-color: yellow"> 非浮动元素块 </div>
+<div class="parent">
+  <div class="child1">
+    first child
+  </div>
+</div>
 ```
+```css
+.child1 {
+  background-color: red;
+}
+```
+![](/image/back-2-font-xinfa-1/first-child.png)
+此时，子元素的高度是**自适应的**，也就是当前浏览器显示的文字高度，如果对页面进行缩放，子元素高度就会变化。
 
-定义样式：
+而父元素包含着子元素，而且父元素里面没有其它元素，因此父元素的高度等于子元素的高度。
+
+我们也可以使用 `height `来设置子元素的高度，让它不自适应。
+
+在实际开发中，经常需要使用一个父元素嵌套一些浮动元素，现在我们就来设置子元素为浮动元素。
 
 ```css
-.float-div{
-    width: 100px;
-    height: 100px;
-    float: left;
+.child1 {
+  background-color: red;
+  float: left;
+  height: 100px;
 }
-.nofloat-div{
-    width: 100px;
-    height: 100px;
+```
+![](/image/back-2-font-xinfa-1/child1-float.png)
+
+我们发现父元素的高度竟然变成了０。
+
+我们尝试再添加一个**非浮动**的子元素时，我们发现，父元素的高度等于第二个非浮动子元素的高度，完全忽视了第一个浮动子元素的存在。
+
+```html
+<div class="child2">
+  second child
+</div>
+```
+
+```css
+.child2 {
+  background-color: green;
+  height: 50px;
+}
+```
+![](/image/back-2-font-xinfa-1/parent-child2.png)
+
+而当我们把第二个子元素设置为浮动的时候，父元素的高度又再度变成了０。
+
+按照上面的方法，添加第三个元素的时候，效果也是相同的。
+
+通过上面的例子，我们可以得出一个结论：**父元素的高度由最后一个非浮动子元素的占位空间所决定。**
+
+但是在页面布局中，**浮动布局的占位空间**往往是我们理想的容器父元素的高度，那么我们如何解决这个问题呢？
+
+## 清除浮动
+使用**清除浮动**就可以解决上面的问题，具体的做法是在父元素的最后添加一个空的元素，并在设置它为清除浮动。
+
+```html
+<div class="child3">
+</div>
+```
+```css
+.child3 {
+  clear: left;
 }
 ```
 
-看效果：
-![](/image/back-2-font-xinfa-1/float-problem.png)
+![](/image/back-2-font-xinfa-1/clear-float-1.png)
 
-我去，我们的非浮动元素块去哪了？为什么只剩下文字了？ 这和我们预想的情况不一样啊！我们使用浏览器检查一下，发现，非浮动元素竟然跑到上面去了。
+我们发现父元素的高度等于浮动元素的占位空间。
 
-![](/image/back-2-font-xinfa-1/float-problem-nofloat.png)
 
-这个不符合我们的需求啊！那么如何解决这个问题呢？
+ `clear: left;` 就是让左浮动元素持有占位空间
 
-要解决这个问题，就要使用 **清除浮动。**
+让我们再来拓展一下，`clear` 除了可以设置为 `left`，还可以设置为 `right` 和 `both`。
 
-我们在非浮动元素的样式里面添加一行 `clear:left`，即可实现清除浮动，让我们来看效果：
+`right` 就是让右浮动元素持有占位空间。
 
-![](/image/back-2-font-xinfa-1/clear-left.png)
-
-真的把非浮动元素给压下来了！而且完美符合我们的设计需求！
-
-我们来分析「 clear: left; 」这段代码：
-
-它用到的关键字是「 clear 」，它的含义是清除。
-
-而 「 left 」 代表是左边。
-
-那么它合起来的意思是：清除左边的浮动元素。
-
-说到更明白一点就是：不让当前元素的左边有浮动元素（也可以理解为让浮动元素持有站位空间）。于是就把非浮动元素压到下一行来咯。
-
-让我们再来拓展一下，clear 除了可以设置为 left，还可以设置为 「 right 」 和 「 both 」。
-
-我相信不用我说你们也明白了吧！
-
-right 就是不让当前元素 **右边** 存在浮动元素嘛。
-
-那 both 就是不让当前元素的 **两边** 出现浮动元素喽。
+`both` 就是让两边的浮动元素都持有占位空间。
 
 ### 浮动布局--最佳实践
 
-通过上面的分析，我们知道清除浮动本质上是让浮动元素拥有**占位空间**，那么在使用浮动的地方，就需要在浮动的最后添加一个空的的元素，并且设置它为清除浮动。
+在上面的代码中，我们是直接手动的在父元素最后添加空元素。那么能不能有一种方法，可以自动的帮我们添加元素并在设置清除浮动呢？
 
-在 CSS 中，我们可以使用 「after 选择器」 来实现添加元素，并且设置属性。具体的用法可以参考:[W3C after 选择器。](http://www.w3school.com.cn/cssref/selector_after.asp)
+回答是肯定的！
+
+在 CSS 中，我们可以使用 「after 选择器」 来实现添加元素，并且设置属性，具体的用法可以参考:[W3C after 选择器](http://www.w3school.com.cn/cssref/selector_after.asp)
 
 下面直接给出代码： 
 
 ```css
-.clearFloat:after{
-  	content: "";
-  	clear: both;
-  	display: block;
+.clearfix:after {
+  content: " ";
+  display: block;
+  clear: both;
+  height: 0;
 }
-```        
+.clearfix {
+  zoom: 1;
+}
+```   
+
+- 在IE6, 7下 `zoom: 1` 会触发 hasLayout，从而使元素闭合内部的浮动。
+
+- 在标准浏览器下，`.clearfix:after` 这个伪类会在应用到 `.clearfix` 的元素后面插入一个 `clear: both` 的块级元素，从而达到清除浮动的作用。     
+
+只要父元素引用了这个 class，就可以自动的实现清除浮动，再也不用担心高度和子元素的占位问题了。
 
 ## 心法小结
 最后，我们再来回顾一下文章介绍的一些心法：
 
-**1. HTML 分为块状元素和行内元素的，块状元素是独占一行的。**
+**1. HTML 分为块状元素和行内元素的，块状元素是独占一行的**
 
-**2. 浮动布局是解决多个块状元素在同一行的最佳方法。**
+**2. 浮动布局相对行内元素的布局，往往更利于精确计算间距**
 
-**3. 清除浮动是为了让浮动元素拥有占位空间。**
+**3. 默认情况下，父元素的高度由最后一个非浮动子元素的占位空间所决定**
 
-**4. after 选择器 + 清除浮动 是浮动布局的一个最佳实践。**
+**4. 浮动布局的占位空间往往是我们理想的容器父元素的高度**
+
+**5. 清除浮动可以解决浮动元素的占位空间问题**
 
 文章中的一些招式可能说的太粗糙，先不用捉急，我们先学心法，招式到后面再专门的学习。
 
-我将会在下一篇博文继续介绍心法 II。
+我会在下一篇博文继续介绍心法 II。
 
