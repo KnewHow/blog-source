@@ -344,8 +344,7 @@
 
       
         
-          
-            <p>在文章的开始之前我们来介绍一下 Scala:</p>
+          <p>在文章的开始之前我们来介绍一下 Scala:</p>
 <ul>
 <li>Scala 由德国的计算机科学家和编程方法教授 Martin Odersky 设计出来的，它的设计原理严格遵循数学的逻辑推理。因此它是一门优秀的编程语言，使用率在工业界和学术界保持平衡。</li>
 <li>Scala 是一门基于 JVM 的编程语言，当下最流行的编程语言 Java 的优秀的类库，Scala都可以直接使用。</li>
@@ -354,62 +353,14 @@
 <p>因此不管是解决实际问题，还是提高对编程语言的认知，Scala 都是一们值得学习的语言。</p>
 <p>纵观市场上的一些 Scala 教程，都是对 Scala 知识进行模块化的介绍。读者看完了以后，似乎明白了什么，但是又有点迷迷糊糊。</p>
 <p>我们这个系列力求寻找一条从 Java 到 Scala 的知识链，通过对知识链和分支的讲解，让大家清晰的理解 Scala 的原理和用法。</p>
-<p>上面我们说了 Scala 是一门面向对象的语言，那么我们就来看一看，什么是面向对象？</p>
-<h2 id="对象和面向对象"><a href="#对象和面向对象" class="headerlink" title="对象和面向对象"></a>对象和面向对象</h2><h3 id="对象"><a href="#对象" class="headerlink" title="对象"></a>对象</h3><p>对象是<strong>封装属性或者操作</strong>的一种实体。例如一辆共享单车，它有车轮，二维码等属性，有开锁和关锁等的操作。那么我们可以有三种方式来封装共享单车。</p>
-<h4 id="基于对象的封装"><a href="#基于对象的封装" class="headerlink" title="基于对象的封装"></a>基于对象的封装</h4><p>这种方式就是直接封装对象，最典型的例子就是 C 语言中的结构体。<br>我们可以使用这种方式来封装共享单车，代码模型如下：</p>
-<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">SharedBicycle</span>&#123;</span>  </span><br><span class="line">  车轮;</span><br><span class="line">  二维码;</span><br><span class="line">  开锁;</span><br><span class="line">  关锁;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
-<h4 id="基于类的封装"><a href="#基于类的封装" class="headerlink" title="基于类的封装"></a>基于类的封装</h4><p>大多数面向对象的语言，如 Java，Scala，C++等，都使用这种方式封装对象，封装共享单车的代码模型如下：<br><figure class="highlight scala"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">SharedBicycle</span></span>&#123;</span><br><span class="line">  属性：车轮;</span><br><span class="line">  属性：二维码;</span><br><span class="line">  方法：开锁;</span><br><span class="line">  方法：关锁;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
-<h4 id="基于原型的封装"><a href="#基于原型的封装" class="headerlink" title="基于原型的封装"></a>基于原型的封装</h4><p>JavaScript 就是使用这种方式封装对象的，封装共享单车的代码模型如下：<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">SharedBicycle</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">  <span class="keyword">this</span>.车轮 = xxx;</span><br><span class="line">  <span class="keyword">this</span>.二维码 = xxx;</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">//添加原型方法</span></span><br><span class="line">SharedBicycle.prototype.开锁 = <span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;...&#125;;</span><br><span class="line">SharedBicycle.prototype.关锁 = <span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;...&#125;;</span><br></pre></td></tr></table></figure></p>
-<h4 id="编程语言分类"><a href="#编程语言分类" class="headerlink" title="编程语言分类"></a>编程语言分类</h4><p>如果我们把上面的三种封装方式和「动态类型」、「静态类型」相结合，就可以把我们熟知的编程语言归类。</p>
-<table>
-<thead>
-<tr>
-<th style="text-align:center"></th>
-<th style="text-align:center">动态类型</th>
-<th style="text-align:center">静态类型</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td style="text-align:center">基于对象的封装</td>
-<td style="text-align:center"></td>
-<td style="text-align:center">C</td>
-</tr>
-<tr>
-<td style="text-align:center">基于类的封装</td>
-<td style="text-align:center">PHP</td>
-<td style="text-align:center">Scala，Java，C++</td>
-</tr>
-<tr>
-<td style="text-align:center">基于原型的封装</td>
-<td style="text-align:center">JavaScript</td>
-<td style="text-align:center">　</td>
-</tr>
-</tbody>
-</table>
-<h3 id="面向对象"><a href="#面向对象" class="headerlink" title="面向对象"></a>面向对象</h3><p>面向对象是一种<strong>程序设计的思路</strong>，它要求工程师以<strong>对象为最小单位</strong>进行程序设计。当对象设计完成，程序设计也就完成了。</p>
-<p>如果我们现在有一个「人骑共享单车」的业务，我们分别使用「命令式程序设计」和「面向对象的程序设计」来对比实现。</p>
-<h4 id="命令式的程序设计"><a href="#命令式的程序设计" class="headerlink" title="命令式的程序设计"></a>命令式的程序设计</h4><p>命令式的程序设计要求我们一步一步的设计程序，当前程序设计完成以后，才能完成下一步的程序设计，因此伪代码如下：</p>
-<ol>
-<li>双手扶好车把手。</li>
-<li>检查刹车。</li>
-<li>把脚放在踏板上。</li>
-<li>进行起步。</li>
-<li>成功骑上共享单车。</li>
-</ol>
-<h4 id="面向对象的程序设计"><a href="#面向对象的程序设计" class="headerlink" title="面向对象的程序设计"></a>面向对象的程序设计</h4><p>面向对象的的程序设计要求我们以对象为最小的设计单位，因此我们需要设计两个对象「人」和「共享单车」。<br>人有骑共享单车的行为(前提是他会骑车)，共享单车有自己的属性和行为，因此，我们的伪代码如下(这里使用class进行封装，其它封装方法也可以)：</p>
-<figure class="highlight scala"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">共享单车</span></span>&#123;</span><br><span class="line">  xxx 属性</span><br><span class="line">  zzz 属性</span><br><span class="line">  ...</span><br><span class="line">  yyy 方法</span><br><span class="line">  ...</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<figure class="highlight scala"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">人</span></span>&#123;</span><br><span class="line">  aaa 属性</span><br><span class="line">  ...</span><br><span class="line">  runBicycle(共享单车 b)&#123;</span><br><span class="line">    ...</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>当我们设计完对象的时候，我们调用　<code>人.runBicycle(共享单车)</code>　即可实现人骑共享单车的业务。</p>
-<p>面向对象的设计思路要求工程师把精力集中在<strong>对象的设计</strong>上，尤其是在团队合作的项目中，如果有人把我需要的对象设计好，我可以直接拿过来使用！</p>
-<h2 id="纯粹的面向对象"><a href="#纯粹的面向对象" class="headerlink" title="纯粹的面向对象"></a>纯粹的面向对象</h2><p>我们知道 Java 是一门面向对象的语言，那么在 Java 中是否真的「万物皆对象」？    </p>
-<p>在 Java 中，我们可以写这么一段代码　<code>int a = 3;</code>　然后我们发现 <code>a</code> 并没有封装任何的属性或者方法。</p>
-<p>因此我们可以说 <code>a</code> 不是一个对象，Java 不是一门纯粹面向对象的语言。</p>
-<p>再看看 Scala ，不论是低阶的　<code>Int</code>，<code>Double</code>，还是高阶类型，都封装有属性或者方法，因此 Scala 才是一门纯粹面向对象的语言。</p>
-<h2 id="小结"><a href="#小结" class="headerlink" title="小结"></a>小结</h2><p><strong>1.对象是封装属性或者方法的一种实体。</strong><br><strong>2.封装的方式有三种：基于对象、基于类、基于原型。</strong><br><strong>3.面向对象是一种设计程序的方式，它要求工程师以对象为最小单位设计程序。</strong><br><strong>4.纯粹的面向对象要求一切变量皆为对象，Scala 是，Java 不是。</strong></p>
-<p>本文虽然没有介绍 Scala 的语法和原理，但是我们以面向对象为起点，寻找一条通往 Scala 的知识链，希望大家继续关注我的下一篇文章。</p>
-
-          
+<p>上面我们说了 Scala 是一门面向对象的语言，那么我们就来看一看，什么是面向对象？<br>
+          <!--noindex-->
+          <div class="post-button text-center">
+            <a class="btn" href="/2018/02/10/2018/02/Form-Java2Scala-1-oop/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
         
       
     </div>
