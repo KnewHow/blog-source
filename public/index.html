@@ -344,16 +344,17 @@
 
       
         
-          <p>在文章的开始之前我们来介绍一下 Scala:</p>
-<ul>
-<li>Scala 由德国的计算机科学家和编程方法教授 Martin Odersky 设计出来的，它的设计原理严格遵循数学的逻辑推理。因此它是一门优秀的编程语言，使用率在工业界和学术界保持平衡。</li>
-<li>Scala 是一门基于 JVM 的编程语言，当下最流行的编程语言 Java 的优秀的类库，Scala都可以直接使用。</li>
-<li>Scala 是一门集「面向对象」和 「函数式」 于一身的编程语言。如果说面向对象是站在地面上观察事物的原理，并且使用这些原理解决问题，那么 Scala 的「高阶」会让你站在高处去看待事物，对问题进行更高层次的抽象。</li>
-</ul>
-<p>因此不管是解决实际问题，还是提高对编程语言的认知，Scala 都是一们值得学习的语言。</p>
-<p>纵观市场上的一些 Scala 教程，都是对 Scala 知识进行模块化的介绍。读者看完了以后，似乎明白了什么，但是又有点迷迷糊糊。</p>
-<p>我们这个系列力求寻找一条从 Java 到 Scala 的知识链，通过对知识链和分支的讲解，让大家清晰的理解 Scala 的原理和用法。</p>
-<p>上面我们说了 Scala 是一门面向对象的语言，那么我们就来看一看，什么是面向对象？<br>
+          <h2 id="背景"><a href="#背景" class="headerlink" title="背景"></a>背景</h2><p>这是我们 「从 Java 到 Scala系列」 的开始，为什么我要写这个系列，这就要从我加入<a href="https://scala.cool/" target="_blank" rel="noopener">水滴团队</a>说起。<br>三个月前，我加入水滴团队，面试中，面试官问：“你了解 Scala 吗？”</p>
+<p>“不了解(尴尬)。”</p>
+<p>“你知道 Spark 吗？它就是使用 Scala 编写的，不过在我们团队中，Scala 主要作为后端语言，我们 90% 以上的业务代码都是使用 Scala 编写。Scala 在国内使用的比较少，但是在国外用的还是蛮多的，如 Twitter 就是使用 Scala 写的后端。”</p>
+<p>“你知道 Scala 这门编程语言产生的背景吗？它是由德国的计算机科学家和编程方法教授 <a href="https://en.wikipedia.org/wiki/Martin_Odersky" target="_blank" rel="noopener">Martin Odersky</a> 设计出来的，它的设计原理严格遵循数学的逻辑推理。因此它是一门优秀的编程语言，它不仅仅在工业界被广泛使用，在学术界也占用很高的研究地位。”</p>
+<p>“你知道 Scala 与 Java 最主要的区别是什么吗？ Scala 和 Java 都基于 JVM，因此 Java 优秀的类库，Scala　都可以直接使用。但是 Scala 不仅仅是「面向对象」，它还拥抱「函数式」，尤其是它的「高阶」。”</p>
+<p>“「高阶」现在你可能还理解不了，打个比方吧，如果我们把「面向对象」比作站在地面上观察事物的原理，并且使用这些原理解决问题，那么「高阶」就是让你站在山上去看待事物，对问题进行更高层次的<strong>抽象</strong>。”</p>
+<p>“因此不管是解决实际问题，还是提高对编程语言的认知，Scala 都是一们值得学习的语言。”</p>
+<p>于是从加入水滴的第一天，我就开始学习这门传说中很厉害的 Scala。我的参数书就是<a href="https://book.douban.com/subject/19971952/" target="_blank" rel="noopener">《快学 Scala》。</a></p>
+<p>当我看完这本书的时候，我发现我对 Scala 的基本用法有了大致的了解，但是对传说中的「高阶」还是不懂。 </p>
+<p>这时我的实习导师 <a href="https://github.com/yison-dripower" target="_blank" rel="noopener">Yison</a> 说：“现在市场上的 Scala 教程，大多数都是按照模块来介绍 Scala，我们能不能出一个「从 Java 到 Scala 系列」，我们寻找一棵从 Java 通往 Scala 的知识树，通过对知识树的讲解，我们来学习 Scala。”</p>
+<p>既然 Java 和 Scala 都是「面向对象」的，那我们这篇文章就来探索一下什么是「面向对象」？<br>
           <!--noindex-->
           <div class="post-button text-center">
             <a class="btn" href="/2018/02/10/2018/02/Form-Java2Scala-1-oop/#more" rel="contents">
