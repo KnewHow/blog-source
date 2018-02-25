@@ -130,6 +130,7 @@ class 人{
 那么是什么支持 Scala 一切皆为「对象」的呢？－**Scala 的通用类型系统。**
 
 ## Scala 通用类型系统
+### 顶类型
 我们知道，在 Java 中，所有「对象」的「顶类型」都是 `java.lang.Object`，但是 Java 却忽略了 `int`，`double`等 JVM 「原始类型」,它们并没有继承 `java.lang.Object`。
 
 但是在 Scala 中，存在一个通用的「顶类型」－　Any。
@@ -152,18 +153,80 @@ val allThings = ArrayBuffer[Any]()
 val myInt = 42             // Int, kept as low-level `int` during runtime
 
 allThings += myInt         // Int (extends AnyVal)
-                           // has to be boxed (!) -> becomes java.lang.Integer in the collection (!)
 
 allThings += new Person()  // Person (extends AnyRef), no magic here
 ```
 
-虽然在 JVM 层一旦遭遇 `ArrayBuffer[Any]` ，我们的 `Int` 实例就会被打包成对象。对于类型系统而言，这一切还算是透明的。
+正是通过这种「通用类型系统」的设计，使得 Scala 摆脱「原始类型」这种边缘情况的纠缠，从而实现「纯粹的面向对象」。
 
-通过这种「通用类型系统」的设计，Scala 就能够摆脱「原始类型」这种边缘情况的纠缠，从而实现「纯粹的面向对象」。
+说完了「顶类型」，我们再来看看「底类型」。
 
-如果想了解更多 Scala 类型相关的东西，可以参考[Scala 类型的类型（一）。](https://scala.cool/2017/03/scala-types-of-types-part-1/)
+### 底类型
+我们知道在 Java 中比较闹心的就是异常处理，当我们调用一个抛出异常的方法，我们必须抛出或者处理异常。
 
+但是在 Scala 中，我们知道一切表达式皆有类型，难道「抛异常」也是有类型的？
 
+```Scala
+scala> val a = Try(throw new Exception("123"))
+a: scala.util.Try[Nothing] = Failure(java.lang.Exception: 123)
+```
+我们发现「抛异常」竟然是 `Nothing` 类型，在 Scala 中，难道 `Nothing` 仅仅是作为「抛异常」的类型？
+
+```Scala
+scala>  def fun(flag:Boolean)={
+          if(flag){
+            1                          // Int
+          }else{
+           throw new Exception("123") //Nothing
+          }
+        }
+fun: (flag: Boolean)Int
+
+```
+我们发现 `fun` 函数并没有报错，而且返回值类型竟然是 `Int`，这让我们有一个大胆的猜测：**`Nothing` 是 `Int` 的子类型。**
+
+```Scala
+[Int] -> ... -> AnyVal -> Any
+Nothing -> [Int] -> ... -> AnyVal -> Any
+```
+其实在 Scala 中， `Nothing` 不仅仅是 `Int` 的子类型，它更是**所有类型的子类型。** 这让我们又产生了一个大胆的猜测：难道 `Nothing` 继承了所有的类型？咳咳，这个问题我们以后在讨论。
+
+在 Scala 中，还有一个类型 `Null` 遵循着和 `Nothing` 一样的原理。
+
+```Scala
+scala> def fun2(flag:Boolean)={
+          if(flag){
+            "123"  //String
+          }else{
+            null   //Null
+          }
+        }
+fun2: (flag: Boolean)String
+```
+同理，我们可以得出 `Null` 是 `String的子类型`
+```Scala
+[String] -> AnyRef -> Any
+Null -> [String] -> AnyRef -> Any
+```
+那我们看看 `Null` 是否可以兼容 `Int`。
+```
+scala>  def fun3(flag:Boolean)={
+          if(flag){
+            123  //Int
+          }else{
+            null   //Null
+          }
+        }
+fun3: (flag: Boolean)Any
+```
+我们发现 `fun3` 的返回值类型竟然是 `Any`，说明 `Null` 不能兼容 Scala 的「值类型」，其实从 Scala 的帮助手册中我们就可以得出结论：**`Null` 是所有引用类型的子类型**
+
+```Scala
+abstract final class Null extends AnyRef
+```
+正因如此，`fun3` 的返回值类型才是 `Any`，因为 `Any` 才是 `AnyVal` 和 `AnyRef` 公共的超类。
+
+「通用类型系统」我们先介绍到这里，下面我们小结一下。
 ## 小结
 
 1.模板是封装属性或者方法的一种抽象。
@@ -171,6 +234,10 @@ allThings += new Person()  // Person (extends AnyRef), no magic here
 3.封装的方式有三种：基于对象、基于类、基于原型。
 4.「面向对象」是一种设计程序的方式，它要求工程师以**对象**为最小单位设计程序。
 5.「纯粹面向对象」要求一切变量皆为对象，Scala 是，Java 不是。
+6.Scala 的「顶类型」是 `Any`，它有两个直接的子类型：`AnyRef` 面向 JVM 对象的世界，`AnyVal` 面向 JVM 值的世界。
+7.Scala 有两个「底类型 	」，`Nothing` 所有类型的底类型，`Null` 所有引用类型的底类型。
 6.「通用类型系统」的设计使得 Scala 摆脱 JVM 原始类型的纠缠，从而实现「纯粹面向对象」。
 
 本文以面向对象为引子，找到了一个 Java 和 Scala 共有的知识节点，从而引出 Scala 的通用类型系统，希望大家继续关注我的下一篇文章。
+
+>[Scala 类型的类型（一）。](https://scala.cool/2017/03/scala-types-of-types-part-1/)
