@@ -219,14 +219,14 @@ scala>  def fun3(flag:Boolean)={
         }
 fun3: (flag: Boolean)Any
 ```
-我们发现 `fun3` 的返回值类型竟然是 `Any`，说明 `Null` 不能兼容 Scala 的「值类型」，其实从 Scala 的帮助手册中我们就可以得出结论：**`Null` 是所有引用类型的子类型**
+我们发现 `fun3` 的返回值类型竟然是 `Any`，说明 `Null` 不能兼容 Scala 的「值类型」，其实从 Scala 的帮助手册中我们就可以得出结论：`Null` 继承了AnyRef，因此 `Null` 是所有**引用类型**的子类型。
 
 ```Scala
 abstract final class Null extends AnyRef
 ```
 正因如此，`fun3` 的返回值类型才是 `Any`，因为 `Any` 才是 `AnyVal` 和 `AnyRef` 公共的超类。
 
-「通用类型系统」我们先介绍到这里，下面我们小结一下。
+「通用类型系统」我们就先介绍到这里，下面我们小结一下。
 ## 小结
 
 1.模板是封装属性或者方法的一种抽象。
