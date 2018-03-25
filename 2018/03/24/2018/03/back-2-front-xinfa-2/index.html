@@ -79,18 +79,18 @@
 
 
 
-<meta name="description" content="上一篇博客，我们介绍了前端页面重构应遵循的第一个心法－「清除浮动」，那么这篇我们就来聊聊第二个心法－「语义化」 Web 应用的交互性如果你在百度或者谷歌的输入框中输入「Scala」并且按下回车，那么百度或者谷歌就会给你展示很多条和「Scala」相关的搜索结果，那么百度是如何知道这些 Web 应用是和「Scala」相关的呢？ 不仅仅是搜索引擎，分类信息网和网络爬虫等其它搜集 Web 应用信息的应用也">
+<meta name="description" content="上一篇博客，我们介绍了前端页面重构应遵循的第一个心法－「清除浮动」，那么这篇我们就来聊聊第二个心法－「语义化」 Web 应用的交互性如果你在百度或者谷歌的输入框中输入「Scala」并且按下回车，那么百度或者谷歌就会给你展示很多条和「Scala」相关的搜索结果，那么百度是如何知道这些 Web 应用是和「Scala」相关的呢？">
 <meta name="keywords" content="前端">
 <meta property="og:type" content="article">
 <meta property="og:title" content="后端工程师入门前端页面重构（二）：心法 II">
 <meta property="og:url" content="http://www.knewhow.me/2018/03/24/2018/03/back-2-front-xinfa-2/index.html">
 <meta property="og:site_name" content="KnewHow">
-<meta property="og:description" content="上一篇博客，我们介绍了前端页面重构应遵循的第一个心法－「清除浮动」，那么这篇我们就来聊聊第二个心法－「语义化」 Web 应用的交互性如果你在百度或者谷歌的输入框中输入「Scala」并且按下回车，那么百度或者谷歌就会给你展示很多条和「Scala」相关的搜索结果，那么百度是如何知道这些 Web 应用是和「Scala」相关的呢？ 不仅仅是搜索引擎，分类信息网和网络爬虫等其它搜集 Web 应用信息的应用也">
+<meta property="og:description" content="上一篇博客，我们介绍了前端页面重构应遵循的第一个心法－「清除浮动」，那么这篇我们就来聊聊第二个心法－「语义化」 Web 应用的交互性如果你在百度或者谷歌的输入框中输入「Scala」并且按下回车，那么百度或者谷歌就会给你展示很多条和「Scala」相关的搜索结果，那么百度是如何知道这些 Web 应用是和「Scala」相关的呢？">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2018-03-25T03:05:24.402Z">
+<meta property="og:updated_time" content="2018-03-25T03:08:22.420Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="后端工程师入门前端页面重构（二）：心法 II">
-<meta name="twitter:description" content="上一篇博客，我们介绍了前端页面重构应遵循的第一个心法－「清除浮动」，那么这篇我们就来聊聊第二个心法－「语义化」 Web 应用的交互性如果你在百度或者谷歌的输入框中输入「Scala」并且按下回车，那么百度或者谷歌就会给你展示很多条和「Scala」相关的搜索结果，那么百度是如何知道这些 Web 应用是和「Scala」相关的呢？ 不仅仅是搜索引擎，分类信息网和网络爬虫等其它搜集 Web 应用信息的应用也">
+<meta name="twitter:description" content="上一篇博客，我们介绍了前端页面重构应遵循的第一个心法－「清除浮动」，那么这篇我们就来聊聊第二个心法－「语义化」 Web 应用的交互性如果你在百度或者谷歌的输入框中输入「Scala」并且按下回车，那么百度或者谷歌就会给你展示很多条和「Scala」相关的搜索结果，那么百度是如何知道这些 Web 应用是和「Scala」相关的呢？">
 
 
 
@@ -343,8 +343,7 @@
 
       
         <p>上一篇博客，我们介绍了前端页面重构应遵循的第一个心法－「清除浮动」，那么这篇我们就来聊聊第二个心法－「语义化」</p>
-<h2 id="Web-应用的交互性"><a href="#Web-应用的交互性" class="headerlink" title="Web 应用的交互性"></a>Web 应用的交互性</h2><p>如果你在百度或者谷歌的输入框中输入「Scala」并且按下回车，那么百度或者谷歌就会给你展示很多条和「Scala」相关的搜索结果，那么百度是如何知道这些 Web 应用是和「Scala」相关的呢？</p>
-<p>不仅仅是搜索引擎，分类信息网和网络爬虫等其它搜集 Web 应用信息的应用也需要这样的功能。此外对于 Web 应用的搭建者，他们更希望其它 Web 应用可以获取自己的 Web 应用信息，甚至精确到每个页面，这样它们的应用才能得到推广。</p>
+<h2 id="Web-应用的交互性"><a href="#Web-应用的交互性" class="headerlink" title="Web 应用的交互性"></a>Web 应用的交互性</h2><p>如果你在百度或者谷歌的输入框中输入「Scala」并且按下回车，那么百度或者谷歌就会给你展示很多条和「Scala」相关的搜索结果，那么百度是如何知道这些 Web 应用是和「Scala」相关的呢？<br><a id="more"></a><br>不仅仅是搜索引擎，分类信息网和网络爬虫等其它搜集 Web 应用信息的应用也需要这样的功能。此外对于 Web 应用的搭建者，他们更希望其它 Web 应用可以获取自己的 Web 应用信息，甚至精确到每个页面，这样它们的应用才能得到推广。</p>
 <p>因此在当今 Web 应用迅速的发展时期，不仅仅要在用户和 Web 应用之间搭建沟通的桥梁，Web 应用之间同样需要“沟通交流”。</p>
 <p>那么如何实现不同 Web 应用之间的交流呢？</p>
 <h2 id="语义化"><a href="#语义化" class="headerlink" title="语义化"></a>语义化</h2><p>第一种实现方式是让 Web 应用(尤其是搜索引擎)往人工智能方向发展，让 Web 应用尽可能智能化。这种实现方式的成本有点高，并且还得依赖于人工智能的发展，而且不是所有的 Web 应用都能拥有搜索引擎背后那雄厚的资源。</p>

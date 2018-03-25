@@ -344,44 +344,15 @@
 
       
         
-          
-            <p>上一篇博客，我们介绍了前端页面重构应遵循的第一个心法－「清除浮动」，那么这篇我们就来聊聊第二个心法－「语义化」</p>
-<h2 id="Web-应用的交互性"><a href="#Web-应用的交互性" class="headerlink" title="Web 应用的交互性"></a>Web 应用的交互性</h2><p>如果你在百度或者谷歌的输入框中输入「Scala」并且按下回车，那么百度或者谷歌就会给你展示很多条和「Scala」相关的搜索结果，那么百度是如何知道这些 Web 应用是和「Scala」相关的呢？</p>
-<p>不仅仅是搜索引擎，分类信息网和网络爬虫等其它搜集 Web 应用信息的应用也需要这样的功能。此外对于 Web 应用的搭建者，他们更希望其它 Web 应用可以获取自己的 Web 应用信息，甚至精确到每个页面，这样它们的应用才能得到推广。</p>
-<p>因此在当今 Web 应用迅速的发展时期，不仅仅要在用户和 Web 应用之间搭建沟通的桥梁，Web 应用之间同样需要“沟通交流”。</p>
-<p>那么如何实现不同 Web 应用之间的交流呢？</p>
-<h2 id="语义化"><a href="#语义化" class="headerlink" title="语义化"></a>语义化</h2><p>第一种实现方式是让 Web 应用(尤其是搜索引擎)往人工智能方向发展，让 Web 应用尽可能智能化。这种实现方式的成本有点高，并且还得依赖于人工智能的发展，而且不是所有的 Web 应用都能拥有搜索引擎背后那雄厚的资源。</p>
-<p>而且搜索引擎最终读取的是去除了 CSS 和 JS 的原始的 HTML，如果 HTML 写的很糟，那估计再智能的搜索引擎也很难读懂吧！</p>
-<p>第二种实现方式是让我们的代码更加<strong>语义化</strong>，搜索引擎只要把我们的代码读一遍，就能很容易的知道我们的 Web 应用是做什么的，具体的功能在什么位置。</p>
-<p>那我们如何让我们的代码更加语义化呢？这就要从内容本身出发。</p>
-<h3 id="本意论"><a href="#本意论" class="headerlink" title="本意论"></a>本意论</h3><p>在 Web 应用中，我们展现的内容有文字、图片、音乐、视频等等，那我们如何来描述这些内容的本身呢？</p>
-<p>在这里我们，我们引入「本意论」这个概念，它第一次被使用是在哲学中，用来解释「是什么」，在这里，它是区分内容本身的一种方式，它有如下几个组件：</p>
-<ul>
-<li>概念(Concept)：一种抽象的分组，用来区分内容本身，例如「人」和「车」就是两个不同的概念。</li>
-<li>实体(Instance)：概念的具体表现形式，有点面向对象的味道，例如「车」的实例可以是「汽车」、「自行车」、「马车」等。</li>
-<li>关系(Relation)：表示不同概念之间的关系，例如「学习」可以在「人」和「大学」之间产生关系。</li>
-<li>公理(Axiom)：在建立这个概念以后，我们让它被接受，例如为什么我们可以称作为「人」？不需要证明，因为这是公理。</li>
-</ul>
-<p>正是基于这样的原理，W3C 在 HTML5 中 增加了很多语义化的标签，这些标签更加清楚的描述它们的本意。如表示表示文章的「article」标签，文章页眉的「header」标签。与表示区块的「div」标签相比，它们更加具有语义化。</p>
-<p>那么在实际开发过程中，如何让我们的 HTML 代码更好的有语义呢？</p>
-<h2 id="语义化遵循的原则"><a href="#语义化遵循的原则" class="headerlink" title="语义化遵循的原则"></a>语义化遵循的原则</h2><h3 id="精确的表达你想描述的内容"><a href="#精确的表达你想描述的内容" class="headerlink" title="精确的表达你想描述的内容"></a>精确的表达你想描述的内容</h3><p>从人与人之间的交流来看，如果你想让你的意思被人明白，那么你需要精确的表达你本意。</p>
-<p>HTML 代码也遵循此原则，如果你想让你的 Web 应用被机器读懂，你需要使用精确的代码描述它们。</p>
-<p>例如你想表示这是一篇文章，那么你需要使用「article」标签，如果你想表示文章的标题或者子标题，那么你应该使用「hx」标签，如果你想表示这是文章中的一幅图片，你应该使用「img」标签，如果你想给文章加上页眉和页脚，那么你需要使用「header」和「footer」标签……</p>
-<p>总之，对内容本意描述的越精确越好。</p>
-<h3 id="处理好层级关系"><a href="#处理好层级关系" class="headerlink" title="处理好层级关系"></a>处理好层级关系</h3><p>「关系」在本意论是一个重要的概念，在确定了的本意之后，还需要处理与其它概念的关系。</p>
-<p>例如，在一篇文章中，文章的内容都是文章这个概念的子集，因此我们需要使用「article」标签来包含所有的文章内容，就像这样：<br><figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">article</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">h1</span>&gt;</span><span class="tag">&lt;/<span class="name">h1</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">p</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">img</span>/&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">p</span>&gt;</span></span><br><span class="line">    ...</span><br><span class="line"><span class="tag">&lt;/<span class="name">article</span>&gt;</span></span><br></pre></td></tr></table></figure></p>
-<p>如果父元素的 <code>class</code> 已经表示某些内容，那么子元素的 <code>class</code> 不需要重复的去表示。</p>
-<p>如父元素为<code>&lt;article class=&quot;acticle&quot;&gt;&lt;/article&gt;</code>，那么子元素使用<code>&lt;h1 class=&quot;h1&quot;&gt;&lt;/h1&gt;</code> 即可，使用<code>&lt;h1 class=&quot;acticle-h1&quot;&gt;&lt;/h1&gt;</code>反而显得赘余。</p>
-<p>文章中每个段落都是并列的关系，我们可以使用 <code>class</code> 属性来标识它们属于同一个「类别」。</p>
-<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">p</span> <span class="attr">class</span>=<span class="string">"paragraph"</span>&gt;</span><span class="tag">&lt;/<span class="name">p</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">p</span> <span class="attr">class</span>=<span class="string">"paragraph"</span>&gt;</span><span class="tag">&lt;/<span class="name">p</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">p</span> <span class="attr">class</span>=<span class="string">"paragraph"</span>&gt;</span><span class="tag">&lt;/<span class="name">p</span>&gt;</span></span><br></pre></td></tr></table></figure>
-<h3 id="资源的语义化"><a href="#资源的语义化" class="headerlink" title="资源的语义化"></a>资源的语义化</h3><p>上面的两个原则，都是针对具体的页面，可是对于整个 Web 应用而言，资源的划分是以 URL 为最小单位的，因此 URL 的语义化，会让搜索引擎可以更好的把握 Web 应用的功能，迅速的定位到具体的功能页面。<br>例如<br><figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">https://weixin.drip.im/index.php/solution/crm</span><br><span class="line">https://weixin.drip.im/solution/crm</span><br></pre></td></tr></table></figure></p>
-<p>虽然两个 URL 都能访问，但是明显第二个 URL 更好些，因为它是技术无关性的。<br>而且 URL 的设计最好能展现 Web 应用的资源结构，下面的 URL 就很好的展现了 <a href="https://drip.im/" target="_blank" rel="noopener">dripower</a> 不同的解决方案：<br><figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">https://weixin.drip.im/solution/crm</span><br><span class="line">https://weixin.drip.im/solution/payment</span><br><span class="line">https://weixin.drip.im/solution/marketing</span><br></pre></td></tr></table></figure></p>
-<p>「心法篇」到这里就介绍完了，可是对于页面布局中的各种疑难杂症该如何解决呢？请大家继续关注这个系列的「招式篇」。</p>
-<blockquote>
-<p><a href="https://www.zhihu.com/question/20455165" target="_blank" rel="noopener">知乎</a><br><a href="https://pdfs.semanticscholar.org/fc3f/c9be203aeaf72b4737c28e4f4ac1ea3dadd1.pdf" target="_blank" rel="noopener">Understanding Semantic Web and Ontologies</a></p>
-</blockquote>
-
-          
+          <p>上一篇博客，我们介绍了前端页面重构应遵循的第一个心法－「清除浮动」，那么这篇我们就来聊聊第二个心法－「语义化」</p>
+<h2 id="Web-应用的交互性"><a href="#Web-应用的交互性" class="headerlink" title="Web 应用的交互性"></a>Web 应用的交互性</h2><p>如果你在百度或者谷歌的输入框中输入「Scala」并且按下回车，那么百度或者谷歌就会给你展示很多条和「Scala」相关的搜索结果，那么百度是如何知道这些 Web 应用是和「Scala」相关的呢？<br>
+          <!--noindex-->
+          <div class="post-button text-center">
+            <a class="btn" href="/2018/03/24/2018/03/back-2-front-xinfa-2/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
         
       
     </div>
@@ -535,7 +506,7 @@
 <p>既然 Java 和 Scala 都是「面向对象」的，那我们就来探索一下什么是「面向对象」吧。<br>
           <!--noindex-->
           <div class="post-button text-center">
-            <a class="btn" href="/2018/02/10/2018/02/Form-Java2Scala-1-oop/#espandi" rel="contents">
+            <a class="btn" href="/2018/02/10/2018/02/Form-Java2Scala-1-oop/#more" rel="contents">
               阅读全文 &raquo;
             </a>
           </div>
@@ -684,7 +655,7 @@
 <p>那么什么是心法呢？</p>
           <!--noindex-->
           <div class="post-button text-center">
-            <a class="btn" href="/2018/01/05/2017/12/back-2-font-xinfa-1/#espandi" rel="contents">
+            <a class="btn" href="/2018/01/05/2017/12/back-2-font-xinfa-1/#more" rel="contents">
               阅读全文 &raquo;
             </a>
           </div>
@@ -835,7 +806,7 @@
 <p>要知道，我对于前端，除了几个基本的标签外，可是一无所知。然而，我很快调整了状态，不就是前端开发么，应该难不倒机智的我。<br>
           <!--noindex-->
           <div class="post-button text-center">
-            <a class="btn" href="/2017/12/15/2017/12/back-2-font-koujue/#espandi" rel="contents">
+            <a class="btn" href="/2017/12/15/2017/12/back-2-font-koujue/#more" rel="contents">
               阅读全文 &raquo;
             </a>
           </div>
