@@ -8,6 +8,7 @@ tags:
 最近阅读一些关于 Kotlin 类型系统方面的书，发现 Kotlin 的类型系统针对 `null` 有着独特的设计哲学。在 Java 或者其它编程语言中，经常会出现 `NullPointerException`，而导致此异常的重要原因是因为你可以写 `String s = null` 这样的代码。其实可以认为这是 Java 等语言类型系统设计的一个缺陷，它们允许 `null` 可以作为任何类型的值！
 
 但是在 Kotlin 中，如果你声明 `val s: String = null`，那么编译器会给你一个 error，因为在 Kotlin 中，你不允许把一个 `null` 值赋给一个普通的类型。如果你声明一个这样的函数 `fun strLen(s: String) = {...}`，那么这个函数将不接受值为 `null` 的参数。
+<!-- more -->
 
 这个设计看起来如此的美好，他可以极大程度的减少 Kotlin 产生 `NullPointerException`，可是如果有一天，你需要调用一个方法，它的返回值可能为 `null` 也可能为 `String` ，那么在 Kotlin 中你可以声明一个可空的字符串类型：`String?`。`val s: String? = null` 此时 Kotlin 的编译器会让这行代码通过。当然它也可以接收一个普通的 `String` 类型的值 `val s: String? = "abc"`。
 
