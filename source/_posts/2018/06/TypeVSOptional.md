@@ -1,6 +1,6 @@
 ---
-title: Kotlin Type? VS Scala Optional
-date: 2018/06/13
+title: Kotlin Type? VS Scala Option
+date: 2018/06/20
 categories: 编程语言
 tags:
 - Scala
