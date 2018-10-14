@@ -7,7 +7,7 @@ tags:
 - 会使用
 ---
 
-Scala-tes-prop provides test cases generator then run test function with them. Finally it will println test result information and return a boolean value to tell you test result which can be asserted by scala test.
+Scala-tes-prop provides test cases generator then run test function with them. Finally it will println test result information and return a boolean value to tell you test result which can be asserted by scala test. Now, let't see how to use it!
 
 ## Generator
 Generator is basic component in scala-test-prop, which can generate test cases you want. For example, if you want to get a range integer, you see following code:
@@ -19,7 +19,7 @@ Gen.choose(1, 10)
 ```
 It also can generate other generator, such as `Gen.odd(10,100)`, `Gen.listOf(10, Gen.choose(10,100))`. The first function will return random odd integer from 10 to 100, but inclusive 100. The second function will return a list with 10 size whose
 elements range is between 10 and 100 but exclusive 100. You can find more in [Object Gen](https://github.com/KnewHow/ScalaProp/blob/master/src/main/scala/prop/Gen.scala)
-
+<!-- more -->
 ## Executor
 Now, you have knew how to obtain a generator, but how to run testing function with them? The Executor match to `Gen` is `Prop`. `Prop` is running parameters to testing result container. You can do `&&` or `||` with two `Prop`, the implement you can refer: https://github.com/KnewHow/ScalaProp/blob/master/src/main/scala/prop/Prop.scala
 
@@ -107,5 +107,5 @@ You can add following code in your build.sbt file to get it:
 libraryDependencies += "com.github.knewhow" %% "scalaprop" % "1.0"
 ```
 
-## GitHub
+## Touch Me
 The project Github address is: https://github.com/KnewHow/ScalaProp, If you has some problems about it or you hava a better solution, you could touch me by email for help or give issues. Thank you!
