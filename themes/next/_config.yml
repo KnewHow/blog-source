@@ -270,7 +270,7 @@ custom_logo:
 # Available value:
 #    normal | night | night eighties | night blue | night bright
 # https://github.com/chriskempson/tomorrow-theme
-highlight_theme: night
+highlight_theme: normal
 
 
 # ---------------------------------------------------------------
@@ -394,14 +394,14 @@ valine:
 # Introduction: https://imsun.net/posts/gitment-introduction/
 # You can get your Github ID from https://api.github.com/users/<Github username>
 gitment:
-  enable: true
+  enable: false
   mint: true # RECOMMEND, A mint on Gitment, to support count, language and proxy_gateway
   count: true # Show comments count in post meta area
   lazy: false # Comments lazy loading with a button
   cleanly: false # Hide 'Powered by ...' on footer, and more
   language: # Force language, or auto switch by theme
   github_user: KnewHow
-  github_repo: https://github.com/KnewHow/BlogComment
+  github_repo: BlogComment
   client_id: 42fd4df801905740cdaa
   client_secret: aba561ff5a24e6db78ed4b6bb897a08f124267ac
   proxy_gateway: # Address of api proxy, See: https://github.com/aimingoo/intersect
