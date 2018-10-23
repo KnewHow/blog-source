@@ -4,7 +4,7 @@ date: 2018/10/23
 categories: 编程语言
 tags:
 - Scala
-- 知原理
+- 会使用
 ---
 
 # Java ArrayList&lt;T&gt; 的一个设计缺陷
