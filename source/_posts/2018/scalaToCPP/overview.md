@@ -1,9 +1,9 @@
 ---
-title: Scala/Java To C/C Plus Plus Overview
-date: 2018/10/23
-categories: 编程语言
+title: Scala To C Plus Plus Overview
+date: 2018/12/20
+categories: ScalaToCPP
 tags:
-- Scala
+- CPP
 - 会使用
 ---
 
@@ -14,7 +14,7 @@ tags:
 * 循环表达式
 * 运算符
 
-# 面向对于
+# 面向对象
 * 封装、继承、多态
 * 对象初始化过程
 
@@ -37,6 +37,8 @@ tags:
 * Lambda 表达式
 * 函数作为参数传递
 
+# 内存回收
+
 # 元编程
 * 反射
 * 宏
@@ -45,7 +47,7 @@ tags:
 * FileRead and FileWrite
 * Network
 
-# 创建工程
 
+# 创建工程
 * 如何在工程中引入其它的第三方类库
 * 如何编程內库并上传到中心仓库
