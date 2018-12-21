@@ -3,7 +3,7 @@
 ## Source: https://github.com/hexojs/hexo/
 
 # Site
-title: Blogs
+title: 个人愚见
 subtitle:
 description: Full Stack Web Developer 
 author: KnewHow
@@ -88,3 +88,17 @@ search:
   field: post
   format: html
   limit: 10000
+
+douban:
+  user: 154863220
+  builtin: true
+  book:
+    title: '豆瓣书单'
+    quote: '任重而道远'
+  # movie:
+  #   title: 'This is my movie title'
+  #   quote: 'This is my movie quote'
+  # game:
+  #   title: 'This is my game title'
+  #   quote: 'This is my game quote'
+  timeout: 10000 

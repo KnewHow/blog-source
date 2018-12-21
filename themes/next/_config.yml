@@ -88,6 +88,7 @@ menu:
   tags: /tags/ || tags
   categories: /categories/ || th
   archives: /archives/ || archive
+  书单: /books || book
   # search: 搜索
   #schedule: /schedule/ || calendar
   #sitemap: /sitemap.xml || sitemap
